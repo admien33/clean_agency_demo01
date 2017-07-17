@@ -1,0 +1,37 @@
+{
+	"template": "blog_last_items_list",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/page_site/section/blog_last_items_list.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"bootstrap/pager",
+				"templates/pages/extra/pager_primary_style.scss",
+				"templates/page_site/section/detail_content_list.scss"
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "common_page_site",
+			"path": 
+			[
+				
+			]			
+		}
+	]
+}

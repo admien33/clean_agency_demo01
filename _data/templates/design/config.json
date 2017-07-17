@@ -1,0 +1,43 @@
+{
+	"default_page_site_config":
+	{
+		"content_section": "main_content",
+		"header_container": "default"
+
+	},
+
+	"default_page_detail_config":
+	{
+		"content_section": "main_content",
+		"header_container": "default"
+	},
+
+
+	#// add specific asset on current page with "custom css templates" force on common
+	#// new asset must be add on _assets/stylesheets/load_assets/
+	#// cas "home", file critic-home-site.css.scss.liquid, with current_name_id_page='home'
+	#// take time to add newasset files ! ~ 1.5s /asset added
+	"list_force_custom_scss_on_page":
+	[
+		#// "home","blog","article"
+	],
+
+
+
+	"list_class_noscript_none2block":
+	[
+		"block_nojs",
+		"hidden_collapse_navig"
+	],
+	"list_class_noscript_none2initial":
+	[
+		"initial_nojs",
+		"link_page_navbar"
+		
+	],
+	"list_class_noscript_xxx2none":
+	[
+		"none_nojs"
+	]
+	
+}

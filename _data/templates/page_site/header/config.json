@@ -1,0 +1,11 @@
+{
+	"list_activated_templates": 
+  [
+    "background_image",
+    "bg_full_img_welc_btn",
+    "default_slider",
+    "last_portfolio_header"
+  ],
+  
+  "default_template": "background_image"
+}

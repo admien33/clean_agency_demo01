@@ -1,0 +1,99 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+
+ -->{% endcomment %}
+
+{% assign row_col_presentation = "col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" %}
+{% assign row_col_items = "col-md-4 col-sm-6" %}
+
+{% assign nb_last_items_display_default = 3 %}{% comment %}Update with 'nb_last_items'{% endcomment %}
+
+{% assign url_page_article = null %}{% comment %}default value, article/index.html{% endcomment %}
+{% assign link_page_ref = '/portfolio/index.html' %}
+
+
+{% comment %}extract data current section{% endcomment %}
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+{% comment %}+++++++++++++++++++++++++++++++++++++++++++++++++++++++{% endcomment %}
+{% comment %}specific, extract custom param {% endcomment %}
+{% assign nb_last_items_display = nb_last_items_display_default | minus: 1 %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='nb_last_items'
+  list=list_param_template_section      
+%}
+{% if value_from_key != null %}
+  {% assign nb_last_items_display = value_from_key | minus: 1 %}
+{% endif %}
+{% comment %}+++++++++++++++++++++++++++++++++++++++++++++++++++++++{% endcomment %}
+
+
+<section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
+    
+    {% comment %}row presentation{% endcomment %}
+    <div class="row">
+      <div class="{{row_col_presentation}} text-center">
+        <h2 class="section-heading">{{meta_section.subtitle}} </h2>
+        <h3 class="section-subheading text-muted">{{meta_section.description}}</h3>        
+        {% if link_page_ref != null and link_page_ref != '' %}
+          <ul class="pager">           
+            <li class="next">
+              <a href="{{ link_page_ref | prepend: site.baseurl | replace: '//', '/' }}">All content</a>
+            </li>
+          </ul>
+        {% endif %}
+        <hr>
+      </div>
+    </div>
+    
+    {% comment %}row items{% endcomment %}
+    <div class="row">
+
+      {% if nb_last_items_display > size_all_items %}
+        {% comment %}size_all_items, specific with coll_ext/extract/item/from_all.html{% endcomment %}
+        {% assign nb_last_items_display = size_all_items %}
+      {% endif %}
+      {% comment %}loop items{% endcomment %}
+      {% for index_item in (0..nb_last_items_display) %}
+        {% include coll_ext/extract/item/from_all.html index=index_item %}       
+
+        {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+           path_item=item.path
+           custom_path=custom_path_items
+           url_page_article=url_page_article
+        %}     
+        
+        <div class="{{row_col_items}} portfolio-item">          
+          <a href="{{url_detailed_article}}" class="portfolio-link" data-toggle="">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fa fa-plus fa-3x"></i>
+              </div>
+            </div>
+            {% if item.miniature_is_reduced_img == true %}
+            	{% picture portfolio-thumbnail {{item.image}} alt="{{item.title}}" %}
+            {% else %}
+            	{% picture portfolio-thumbnail {{item.miniature}} alt="{{item.title}}" %}                       
+            {% endif %}                    
+          </a>
+          <div class="portfolio-caption">
+            <h4>{{ item.title }}</h4>
+            <p class="text-muted">{{ item.subtitle }}</p>          
+          </div>
+        </div>
+      {% endfor %}{% comment %}end loop items{% endcomment %}      
+  	</div>{% comment %}end row items{% endcomment %}  
+
+</section>

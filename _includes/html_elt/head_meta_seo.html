@@ -1,0 +1,64 @@
+{% comment %}<!--
+  param in :
+    include.meta_page  
+  common-param :
+  	is_page_site_gl
+  	site
+    page
+  param out:
+    return html meta description seo and title
+ -->{% endcomment %}
+
+
+{% assign description_seo = site.description %}
+{% assign title_seo = site.title %}
+
+
+{% comment %}discrim page "site" / page "detail"{% endcomment %}
+{% if is_page_site_gl %}  
+	{% assign page_title = include.meta_page.title %}
+	{% assign page_subtitle = include.meta_page.subtitle %}
+	{% assign page_description = include.meta_page.description %}
+	{% assign page_content = include.meta_page.content %}
+{% else %}
+	{% assign page_subtitle = page.title %}
+	{% assign page_description = page.description %}
+	{% assign page_content = page.content %}
+{% endif %}
+
+
+
+{% if page.url == '/' %}
+	{% assign title_seo = title_seo | prepend: ' ' | prepend: page_title %}
+{% else %}
+	{% unless page_subtitle == null and page.url == '/' %}	
+		{% assign title_seo = title_seo | append: '-' | append: page_subtitle %}    
+	{% endunless %}
+{% endif %}
+
+
+{% if page_description == null or page_description.length < 5 %}
+
+	{% assign text_splitted = page_content %}
+  {% include coll_ext/utils/text/split-text-until-first-match.html 
+    text= page_content
+    match_ref='</h1>'
+  %}
+  {% assign excerpt_local = text_splitted | strip_html | truncatewords: 20 %}
+
+	{% assign description_seo = description_seo | append: ' ' | append: excerpt_local %}
+
+{% else %}
+
+	{% assign description_seo = description_seo | append: ' ' | append: page_description %}
+{% endif %}
+
+
+
+
+<meta name="description" content="{{description_seo | strip_html | strip_newlines | truncate: 250}}" />
+
+
+<title>
+  {{title_seo}}
+</title>

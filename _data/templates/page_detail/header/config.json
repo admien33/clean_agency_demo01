@@ -1,0 +1,8 @@
+{
+	"list_activated_templates": 
+  [
+    "background_image"
+  ],
+    
+  "default_template": "background_image"
+}

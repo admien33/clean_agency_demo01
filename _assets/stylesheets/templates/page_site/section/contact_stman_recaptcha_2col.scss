@@ -1,0 +1,72 @@
+//{% include coll_ext/site-config/add-scss-var/custom_style.html %}
+//{% comment %} Active include if scss template is not added on :  {% endcomment %}
+//{% comment %}  - common lists of /_data/template/pages/common.yml {% endcomment %}
+//{% comment %}  - 'noncritic_add' part of a file in subfolders /_data/template/page* {% endcomment %}
+//{% comment %} AND if custom sass defined site-config are needed, see /_data/scss/var_config{% endcomment %}
+//{% comment %} note: file extension '.liquid' MUST be added : template.scss.liquid {% endcomment %}
+
+
+section.contact_2col {
+    background-color: $color_secondary_dark_gl;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+section.contact_2col .section-heading {
+    color: #fff;
+}
+
+section.contact_2col .form-group {
+    margin-bottom: 25px;
+}
+
+section.contact_2col .form-group input,
+section.contact_2col .form-group textarea {
+    padding: 20px;
+}
+
+section.contact_2col .form-group input.form-control {
+    height: auto;
+}
+
+section.contact_2col .form-group textarea.form-control {
+    height: 236px;
+}
+
+section.contact_2col .form-control:focus {
+    border-color: $color_primary_gl;
+    box-shadow: none;
+}
+
+section.contact_2col::-webkit-input-placeholder {
+    text-transform: uppercase;
+    font-family: $font_primary_gl;
+    font-weight: 700;
+    color: #bbb;
+}
+
+section.contact_2col:-moz-placeholder {
+    text-transform: uppercase;
+    font-family: $font_primary_gl;
+    font-weight: 700;
+    color: #bbb;
+}
+
+section.contact_2col::-moz-placeholder {
+    text-transform: uppercase;
+    font-family: $font_primary_gl;
+    font-weight: 700;
+    color: #bbb;
+}
+
+section.contact_2col:-ms-input-placeholder {
+    text-transform: uppercase;
+    font-family: $font_primary_gl;
+    font-weight: 700;
+    color: #bbb;
+}
+
+section.contact_2col .text-danger {
+    color: #e74c3c;
+}
+

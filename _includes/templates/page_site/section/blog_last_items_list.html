@@ -1,0 +1,139 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+
+ -->{% endcomment %}
+
+{% assign row_col_presentation = "col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" %}
+{% assign url_page_article='blog/index.html' %}
+{% assign nb_last_items_display = 5 | minus: 1 %}
+{% assign max_older_items = 20 | minus: 1 %}{% comment %} then link archive page, todo{% endcomment %}
+
+
+
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+
+{% comment %}specific, extract custom param "nb_last_items" from meta list if defined, else default:5{% endcomment %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='nb_last_items'
+  list=list_param_template_section      
+%}
+{% if value_from_key != null %}
+  {% assign nb_last_items_display = value_from_key | minus: 1 %}
+{% endif %}
+
+
+
+
+<section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
+
+  {% comment %}row presentation{% endcomment %}
+  <div class="row text-center">
+    <div class="{{row_col_presentation}}">
+      <h2 class="section-heading">{{meta_section.subtitle}} </h2>
+      <h3 class="section-subheading text-muted">{{meta_section.description}}</h3>
+      {% if meta_section.subtitle != null or meta_section.description != null %}
+        <hr>
+      {% endif %}
+    </div>
+  </div>
+  
+  {% comment %}row items{% endcomment %}
+  <div class="row">
+    <div class="{{row_col_presentation}}">
+
+      {% if nb_last_items_display > size_all_items %}
+        {% comment %}size_all_items, specific with coll_ext/extract/item/from_all.html{% endcomment %}
+        {% assign nb_last_items_display = size_all_items %}
+      {% endif %}
+      {% comment %}loop items{% endcomment %}
+      {% for index_item in (0..nb_last_items_display) %}
+        {% include coll_ext/extract/item/from_all.html index=index_item %}       
+
+        {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+           path_item=item.path
+           custom_path=custom_path_items
+           url_page_article=url_page_article
+        %}
+
+        <div class="post-preview">
+          <a href="{{ url_detailed_article }}">
+            <h2 class="post-title">
+              {{ item.subtitle }}
+            </h2>
+            {% if item.description %}
+              <h3 class="post-description">
+                {{ item.description }}
+              </h3>
+            {% endif %}
+          </a>
+          <p class="post-meta">
+            Posted on {{ item.date-publication | date: "%B %-d, %Y" }}
+          </p>
+        </div>
+        {% unless forloop.last == true %}
+          <hr>
+        {% endunless %}
+      {% endfor %}{% comment %}end loop items{% endcomment %}
+
+      {% comment %}extra loop older items{% endcomment %}
+      {% if size_all_items > nb_last_items_display %}
+      {% comment %}size_all_items, specific with coll_ext/extract/item/from_all.html{% endcomment %}
+        <ul class="pager">          
+          <li class="next">
+            <a href="#olderArtBLog" class="btn btn-default" data-toggle="collapse">Older Articles</a>
+          </li>
+        </ul>
+        <div id="olderArtBLog" class="collapse">
+          {% comment %}This div is hidden by default{% endcomment %}
+          {% if size_all_items < max_older_items %}
+            {% assign max_older_items = size_all_items %}
+          {% endif %}
+          {% assign nb_last_items_display = nb_last_items_display | plus: 1 %}
+          
+          {% for index_item in (nb_last_items_display..max_older_items) %}
+            {% include coll_ext/extract/item/from_all.html index=index_item %}       
+
+            {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+               path_item=item.path
+               custom_path=custom_path_items
+               url_page_article=url_page_article
+            %}
+            <div class="post-preview">
+              <a href="{{ url_detailed_article }}">
+                <h2 class="post-title">
+                  {{ item.subtitle }}
+                </h2>
+                {% if item.description %}
+                  <h3 class="post-description">
+                    {{ item.description }}
+                  </h3>
+                {% endif %}
+              </a>
+              <p class="post-meta">
+                Posted on {{ item.date-publication | date: "%B %-d, %Y" }}
+              </p>
+            </div>
+            {% unless forloop.last == true %}
+              <hr>
+            {% endunless %}
+          {% endfor %}         
+        </div>
+      {% endif %}{% comment %}end extra loop older items{% endcomment %}
+      
+    </div>{% comment %}end class row_col_presentation{% endcomment %}
+  </div> {% comment %}end row items{% endcomment %}
+
+</section>

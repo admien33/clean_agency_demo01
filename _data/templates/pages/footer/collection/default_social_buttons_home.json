@@ -1,0 +1,66 @@
+{
+	"template": "default_social_buttons_home",
+	"coll_site": "site-config/footer/default_social_buttons_home",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/pages/footer/default_social_buttons_home.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "custom_page_critic",
+			"path": 
+			[
+				#// V1, load on specific asset, add ext "_liq" & ".liquid" if needed and include custom var scss on template file
+				"templates/pages/footer/default_social_buttons_home_liq.scss.liquid"			
+			],
+			#// extra custom, alternative approach : 
+			"force_on_page": 
+			[
+				"home"
+			],
+			"path_force": 
+			[
+				#// V1, specific custom force to common on current page : need specific asset file
+				#// see list_force_custom_scss_on_page on templates/design/config
+				"templates/pages/footer/default_social_buttons_home.scss"			
+			]
+		},
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+
+			]
+		}
+	]
+}
+
+
+
+#// {
+#// 	"added_on": "custom_page_critic",			
+#// 	"path": 
+#// 	[
+#// 		#// V1, load on specific asset, add ext "_liq" & ".liquid" if needed and include custom var scss on template file
+#// 		"templates/pages/footer/default_social_buttons_home_liq.scss.liquid"			
+#// 	]
+#// },

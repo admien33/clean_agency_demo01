@@ -1,0 +1,35 @@
+{
+	"template": "default_social_buttons",
+	"coll_site": "site-config/footer/default_social_buttons",
+	
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/pages/footer/default_social_buttons.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/pages/footer/default_social_buttons.scss"
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+			]
+		}
+	]
+}

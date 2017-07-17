@@ -1,0 +1,33 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+ -->{% endcomment %}
+
+
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+<section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
+  <!-- <div class="container"> -->
+
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        {{meta_section.content}}
+
+      </div>
+    </div> {% comment %}/ .row{% endcomment %}
+
+  <!-- </div> -->
+</section>
+

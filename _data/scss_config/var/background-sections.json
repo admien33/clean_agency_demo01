@@ -1,0 +1,28 @@
+{  
+  "config":
+  {
+    "type": "color",
+    "source": "item"
+  },
+  "list-id":
+  [
+    {
+      "id" : "bg_sections_alt1"
+    },
+    {
+      "id" : "bg_sections_alt2"
+    },
+    {
+      "id" : "bg_sections_alt3"
+    },
+    {
+      "id" : "bg_sections_default_custom"
+    }
+  ]   
+}
+
+// list of variables used in scss template file : /_assets/stylesheets/templates
+// format color variable :  color_{{id}}_gl ; ex, color_bg_sections_alt1_gl
+// ! must correspond to filename items in section coll_site/site-config/background-sections/index.md 
+// update list if new metadata
+ 

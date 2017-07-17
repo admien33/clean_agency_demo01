@@ -1,0 +1,19 @@
+{  
+  "config":
+  {
+    "type": "color",
+    "source": "item"
+  },
+  "list-id":
+  [
+    {
+      "id" : "bg_site"
+    }
+  ]   
+}
+
+// list of variables used in scss template file : /_assets/stylesheets/templates
+// format color variable :  color_{{id}}_gl ; ex, color_bg_site_gl
+// ! must correspond to filename items in section coll_site/site-config/background-site/index.md 
+// update list if new metadata
+ 

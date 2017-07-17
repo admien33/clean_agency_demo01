@@ -1,0 +1,92 @@
+{%comment%}<!--
+param in :
+common_param:
+  list_param_page_template
+  meta_section
+  direct_items, size_direct_items
+param out :
+  html template
+ -->{%endcomment%}
+
+{% comment %}extract custom param{% endcomment %}
+{% assign class_style_bg_navbar = '' %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='type_bg_navig'
+  list=list_param_page_template      
+%}
+{% if value_from_key != null %}
+  {% assign class_style_bg_navbar = value_from_key %}
+{% endif %}
+
+
+
+<nav id="mainDefaultNavFixed" class="navbar navbar-default navbar-fixed-top default_nojs {{class_style_bg_navbar}}">
+
+  <div id="" class="header-nav-nojs block_nojs">
+    <a href="#menu-site" class="">
+      <span>Menu</span>   
+    </a>
+  </div>
+
+  {% comment %}Brand and toggle get grouped for better mobile display{% endcomment %}
+  <div class="navbar-header none_nojs">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span><span class="not-inf-xsm">Menu</span>&nbsp;<i class="fa fa-bars"></i>
+    </button>
+    <a class="navbar-brand " href="{{ site.baseurl }}/">{{ site.title }}</a>    
+  </div>
+  {% comment %}Collect the nav links, forms, and other content for toggling{% endcomment %}
+  <div class="navbar-collapse collapse hidden_collapse_navig" id="bs-navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-right trigger-nav" id="menu-site">               
+
+      {% for index_item in (0..size_direct_items) %}
+        {% include coll_ext/extract/item/from_direct.html index=index_item %}
+
+        {% assign link_nav = item.link %}
+
+        <li>
+          <a href="{{ link_nav | prepend: site.baseurl }}">{{ item.title }}</a>
+        </li>
+
+      {% endfor %}
+
+      <li class="initial_nojs">
+        <a href="#X" title="X Close Menu" class="closeNav ">X Close Menu</a>
+      </li>
+
+    </ul>
+  </div>{% comment %}/.navbar-collapse{% endcomment %}
+</nav>
+
+{% comment %}custom style trigger when nojs{% endcomment %}
+<noscript>
+  <style>
+    .default_nojs.navbar-default .navbar-header .navbar-brand,
+    .default_nojs.navbar-default .nav > li > a,
+    .default_nojs.navbar-default .nav > li > a:hover {
+      color: #333333;
+    }
+    .default_nojs .header-nav-nojs {
+      width: 100%;
+      display: block;
+      padding: 0.3em 0.5em;
+      text-align: right;
+    }   
+    .default_nojs .trigger-nav{
+      position:fixed;
+      top:30px;
+      left:0;
+      width:100%;
+      z-index:1000;
+      background-color: white;
+      opacity:0;   
+      transition: opacity 200ms ease-in;
+      pointer-events: none;
+      text-align: center;
+    }
+    .default_nojs .trigger-nav:target{
+      opacity:1;
+      pointer-events: auto;
+    }
+  </style>
+</noscript>

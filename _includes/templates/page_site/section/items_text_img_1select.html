@@ -1,0 +1,74 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+ -->{% endcomment %}
+
+
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+<section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
+
+  <!-- <div class="container"> -->
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">{{meta_section.title}}</h2>
+        <h3 class="section-subheading text-muted">{{meta_section.description}}</h3>
+      </div>
+    </div>
+    
+    <div class="row">
+    
+    {% for index_item in (0..size_direct_items) %}
+      
+      {% include coll_ext/extract/item/from_direct.html index=index_item %}
+
+      <div class="col-sm-4">
+        <div class="custom-item">
+
+          {% if item.type-miniature == 'image-circle' %}                    
+            {% picture team-miniature {{item.miniature}} alt="team {{item.title}}" %}
+          {% endif %}
+
+          <h4>{{ item.title }}</h4>
+          <p class="text-muted">{{ item.position }}</p>
+
+          {% if item.content contains '<ul>' %}
+
+            {% assign ul_inline = '<ul class="list-inline social-buttons">' %}
+            {% assign content_adapt = item.content | replace_first: '<ul>', ul_inline %}
+
+            {{content_adapt}}
+
+          {% else %}
+
+            {{item.content}}
+
+          {% endif %}                
+
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 text-center">
+        <div class="large text-muted">
+          {{meta_section.last_words}}
+        </div>
+      </div>
+    </div>
+    
+  <!-- </div> -->  {% comment %}/ .container{% endcomment %}
+</section>

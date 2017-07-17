@@ -1,0 +1,27 @@
+{
+  "list_activated_templates": 
+  [
+    "aside_img_default",
+    "blog_angular_content",
+    "contact_stman_recaptcha_list",
+    "items_text_img_fa",
+    "portfolio_angular_content",
+    "portfolio_design_grid_detail",
+    "portfolio_last_items_grid"
+  ],
+
+  "default_template": "index_content",
+  "path_coll_subsection": "page-sections",
+  "param_templ_path_items_dataset": "folder_items",
+
+  "extra_param_page_templ":
+  [
+    {
+      "key" : "add_extra_bg",
+      "list_value": 
+      [
+        "alternate_with_custom"
+      ]
+    }
+  ]   
+}

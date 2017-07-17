@@ -1,0 +1,129 @@
+{%comment%}<!--
+param in :
+common_param:
+  name_id_page
+  meta_page
+  sections_page,size_sections_page
+  custom_page_config_section
+param out :
+  html
+ -->{%endcomment%}
+
+{% comment %}extract custom param{% endcomment %}
+{% comment %}{% assign class_style_bg_navbar = '' %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='type_bg_navig'
+  list=list_param_page_template      
+%}
+{% if value_from_key != null %}
+  {% assign class_style_bg_navbar = value_from_key %}
+{% endif %}{% endcomment %}
+{% comment %}
+<nav id="mainNavSectionsFixed" class="navbar navbar-default navbar-fixed-top btn-home {{class_style_bg_navbar}}">
+ 
+  <div class="navbar-header">   
+    <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span><span class="not-inf-xsm">Menu</span>&nbsp;<i class="fa fa-bars"></i>       
+    </button>
+    <a class="navbar-brand page-scroll" href="#{{site.data.templates.pages.extra.config.id_page_top}}">{{site.title}}</a>
+  </div>
+
+  <div class="navbar-collapse collapse hidden_collapse_navig" id="bs-navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-right">
+      
+      {% for index_section in (0..size_sections_page) %}
+
+        {% include coll_ext/extract/item/from_sections_page.html index=index_section %}
+
+        {% include coll_ext/utils/list/extract_value_from_key.html 
+          key='section_navig'
+          list=item_section.list_param_template      
+        %}
+        {% assign section_navig = value_from_key %}
+    
+        {% if section_navig != null%}
+        
+          {% assign name_id= null %}
+          {% include coll_ext/utils/url/extract_name_id_from_url.html 
+            url=item_section.url
+          %}
+          {% assign id_section_curr = name_id_page | append: '-' | append: name_id %}
+          <li>
+            <a class="page-scroll" href="#{{id_section_curr}}">{{section_navig}}</a>
+          </li>
+
+          {% if forloop.first == true %}
+            {% assign name_id_first = name_id %}
+          {% endif %}
+
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</nav>{% endcomment %}
+
+
+
+
+
+
+
+{% comment %} Header {% endcomment %}
+{% include coll_ext/extract/site_subsection.html 
+  path_section=custom_page_config_section
+%}
+
+{% assign textWelcome = '' %}
+{% assign btnWelcome = '' %}
+{% assign btnWelcomeDisplay=false %}
+
+{% for index_item in (0..size_direct_items) %}
+      
+  {% include coll_ext/extract/item/from_direct.html index=index_item %}
+
+  {% if item.path contains '/text-header.md' %} 
+    {% if item.order < 100 %}
+      {% assign textWelcome = item.content %} 
+    {% endif %}
+  {% endif %}
+
+  {% if item.path contains '/bouton-header.md' %} 
+    
+      {% assign btnWelcome = item.content %}
+      {% if item.order < 100 %}
+        {% assign btnWelcomeDisplay=true %}
+      {% endif %}
+  {% endif %}
+
+{% endfor %}
+
+{% comment %}extract path_img_src{% endcomment %}
+{% include templates/utils/extract/path_img_src.html 
+  path_image=meta_page.header_img
+%}
+
+<header class="btn-home" style="background-image: url({{path_img_src}})">
+
+  <div class="header-content">
+      <div class="header-content-inner">
+        <div>
+          {{textWelcome}}
+        </div>
+          
+        {% if name_id_first and btnWelcomeDisplay == true %}
+          {% assign id_section_first = name_id_page | append: '-' | append: name_id_first %}
+          {% assign text_btn = 'Find Out More' %}
+          {% if btnWelcome.size > 2 %}
+            {% assign text_btn = btnWelcome | markdownify | strip_html %}
+          {% endif %}
+
+          <a href="#{{id_section_first}}" class="page-scroll btn btn-xl">
+            {{text_btn}}
+          </a>            
+        {% endif %}
+      </div>
+  </div>
+  
+</header>
+
+

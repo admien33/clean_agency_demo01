@@ -1,0 +1,34 @@
+# Site wide configuration
+
+url: http://localhost:4000
+
+# Plugin: jekyll-picture-tag
+#picture:
+  # url: http://localhost:4000
+
+# Site owner
+
+# owner:
+#   google:
+#     ad-client: ""
+#     ad-slot: ""
+#     analytics: ""
+#     verify: ""
+#   bing:
+#     verify: ""
+#   alexa:
+#     verify: ""
+#   yandex:
+#     verify: ""
+# disqus-shortname: mmistakes-dev
+
+
+# Plugin: jekyll-assets
+
+assets:
+  cache: false
+  compress:
+    css: false
+    js: true
+  features:
+    liquid: true

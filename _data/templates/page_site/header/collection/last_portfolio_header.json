@@ -1,0 +1,36 @@
+{
+	"template": "last_portfolio_header",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/page_site/header/last_portfolio_header.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_critic_page_site",
+			"path": 
+			[
+				"templates/page_site/header/default_intro_header_box_no_bg.scss",
+				"templates/page_site/header/default_intro_header.scss"
+			]			
+		}
+	],
+	
+	"import_js":
+	[
+		{
+			"added_on": "common_page_site",
+			"path": 
+			[
+				
+			]				
+		}
+	]
+}

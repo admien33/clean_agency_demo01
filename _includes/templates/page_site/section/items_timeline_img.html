@@ -1,0 +1,75 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+ -->{% endcomment %}
+
+
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+
+<section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
+
+  <!-- <div class="container"> -->
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">{{meta_section.title}}</h2>
+        <h3 class="section-subheading text-muted">{{meta_section.description}}</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="timeline">
+
+        {% for index_item in (0..size_direct_items) %}
+
+          {% include coll_ext/extract/item/from_direct.html index=index_item %}                
+
+          {% if item.type-timeline != '' and item.type-timeline != 'default' %}
+            <li class="timeline-inverted">
+          {% else %}
+            <li>
+          {% endif %}
+          {% comment %}+++++++++++++++++++++++++++++++++++++{% endcomment %}
+            {% if item.type-timeline == 'text' %}
+              <div class="timeline-image">
+                {{item.content}}
+              </div>
+            {% else %}
+              {% if item.type-miniature == 'image-circle' %}                        
+                <div class="timeline-image">                            
+                  {% picture about-timeline-miniature {{item.miniature}} alt="{{item.description}}" %}
+                </div>                                    
+              {% endif %} 
+
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4>{{item.title}}</h4>
+                  <h4 class="subheading">{{item.description}}</h4>
+                </div>
+                <div class="timeline-body text-muted">
+                  {{item.content}}
+                </div>
+              </div>
+            {% endif %}
+          {% comment %}+++++++++++++++++++++++++++++++++++++{% endcomment %}
+          </li>
+
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  <!-- </div> -->
+</section>

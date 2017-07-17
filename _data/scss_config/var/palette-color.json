@@ -1,0 +1,28 @@
+
+{  
+  "config":
+  {
+    "type": "color",
+    "source": "section"
+  },  
+  "list-id":
+  [
+    {
+      "id" : "muted"
+    }, 
+    {
+      "id" : "primary"
+    }, 
+    {
+      "id" : "secondary"
+    },
+    {
+      "id" : "secondary-dark"
+    }
+  ]   
+}
+
+// list of variables used in scss template file : /_assets/stylesheets/templates
+// format color variable :  color_{{id}}_gl ; ex, color_primary_gl
+// ! must correspond to filename items in section coll_site/site-config/palette-color
+// update list if new item

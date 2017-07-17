@@ -1,0 +1,33 @@
+{
+	"template": "default_content",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/page_site/content/default_content.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+			]				
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "common_page_site",
+			"path": 
+			[
+			]				
+		}
+	]
+}

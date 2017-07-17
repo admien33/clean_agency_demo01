@@ -1,0 +1,75 @@
+---
+layout: compress
+---
+
+{% assign custom_path_items = 'detailed-contents/blog/' %}
+{% assign default_page_article_url = "blog/index.html" %}
+
+{% include coll_ext/extract/dataset.html 
+	model_ref_force='subsections-dataset-date-publication'
+%}
+
+{% include coll_ext/extract/subfn_dataset/sub_items/raw_direct_all_items.html
+  path_subsection=custom_path_items
+%}
+
+{
+  "list":
+  [
+
+  {% for index_item in (0..size_all_items) %}
+
+  	{% include coll_ext/extract/item/from_all.html index=index_item %}
+
+    {% comment %}name_id article{% endcomment %}
+    {% include coll_ext/utils/path/extract_name_id_from_path.html 
+      path=item.path
+    %}
+    {% assign path_name_id = '/' | append: name_id | append: site.collections_ext.path_extension_item %}
+
+    {% comment %}extract path article on collection, and associated url {% endcomment %}
+    {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+       path_item=item.path
+       custom_path=custom_path_items
+       path_coll=path_coll_ext_dataset
+       url_page_article=default_page_article_url
+    %} 
+    {% comment %}path_folder_article, filtering name_id{% endcomment %}
+    {% assign path_folder_article = path_detailed_article %}
+    {% assign path_folder_article = path_folder_article | append: site.collections_ext.path_extension_item %}
+    {% assign path_folder_article = path_folder_article | replace: path_name_id, '' %}
+  	
+  	{% comment %}path_json article{% endcomment %}
+    {% assign path_json = item.path %}
+  	{% assign split_dataset = path_coll_ext_dataset | split: '/' %}
+  	{% assign current_coll = split_dataset[0] %}
+  	{% assign path_name_id_json = '/' | append: name_id | append: '.json' %}	
+  	{% assign path_json = path_json | replace_first: current_coll,'' %}
+  	{% assign path_json = path_json | replace_first: path_name_id,path_name_id_json %}
+  	{% assign path_json = path_json | prepend: site.baseurl %}
+  	
+  	{% comment %}path_img_src{% endcomment %}
+    {% include templates/utils/extract/path_img_src.html 
+      path_image=item.header_img
+    %}
+
+  	{% comment %}<!-- json data -->{% endcomment %}
+    {
+    	"name_id" : "{{name_id}}",
+      "path_folder": "{{path_folder_article}}",
+    	"path_json" : "{{path_json}}",
+    	"title" : "{{item.subtitle | escape }}",    
+      "meta_date" : "{{item.date-publication | date: "%B %-d, %Y"}}",
+      "path_header_img" : "{{path_img_src}}",
+      "description" : "{{item.description | strip_html | strip }}"    
+    } {% unless forloop.last %},{% endunless %}
+
+  {% endfor %}
+
+  ],
+  "config":
+  {
+    "hash_prefix": "{{site.data.templates.pages.extra.config.default_hash_prefix_article_url}}",
+    "url_page_index": "{{site.baseurl | append: '/' | append: default_page_article_url}}"
+  }
+}

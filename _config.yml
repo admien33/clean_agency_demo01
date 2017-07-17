@@ -1,0 +1,243 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: "Clean Agency"
+email: your-email@domain.com
+description: "Site web based on start bootstrap design!"
+# baseurl: ""
+baseurl: "/clean-agency-demo01" # the subpath of your site, e.g. /blog
+# url: http://admien33.github.io # the base hostname & protocol for your site
+url: https://d2m.tech # the base hostname & protocol for your site
+
+lang: en
+
+
+
+# twitter_username: lacasebiocoutras
+# github_username:  lacasebiocoutras
+# words_per_minute: 150
+
+
+# Jekyll configuration
+permalink: /:path.html
+# permalink: pretty
+# excerpt_separator: <!--fin-excerpt-->
+
+
+
+# Configuration settings you cannot change from https://help.github.com/articles/configuring-jekyll/
+# https://jekyllrb.com/docs/configuration/
+# Produce an index for related posts:
+# lsi: false
+# Disable custom plugins, and ignore symbolic links:
+#safe: true
+# source: [your repo's top level directory]
+# incremental: false
+# highlighter: rouge
+# gist:
+#    noscript: false
+# liquid:
+#   error_mode: warn
+# strict_front_matter: true
+
+
+# Build settings
+markdown: kramdown
+
+# sass:
+#   sass_dir: _assets/stylesheets
+#   style: compressed
+# _layouts/compress.html
+compress_html:
+  clippings: all
+  endings: all
+  comments: all # ["<!--", "-->"]
+
+
+keep_files: [images]
+
+exclude:
+  - gulp
+  - node_modules
+  - .asset-cache
+  - .editorconfig
+  - .gitignore
+  - .jshintrc
+  - .ruby-version
+  - Gemfile*
+  - README.md
+  - autoprefixer.yml
+  - gulpfile.js
+  - package.json
+  - _site/
+  - .code-highlighter-cache
+  - Rakefile.rb
+  - vendor
+  - .travis.yml
+  - deploy.sh
+  - deploy_init.sh
+  - assets-js/app
+  - assets-js/node_modules
+  - assets-js/package.json
+  - assets-js/webpack.config.js
+
+# Plugins
+whitelist:
+
+plugins:
+  - jekyll-assets # generate locally !
+  # - jekyll-sitemap
+  # - jekyll-paginate
+  # - jekyll-feed
+
+
+# Plugin: jekyll-assets
+assets:
+  sources:    
+    - _assets/font-awesome
+    - _assets/images
+    - _assets/js
+    - _assets/stylesheets   
+  #
+  compress:
+    # css: false | true | default - development: false, production: true
+    # js: false | true | default - development: false, production: true
+    css: true
+    js: true
+  #
+  # autowrite: true
+  # cache: false | directory | default: .asset-cache
+  # if change google font item, regenerate ok ONLY with option "cache: false"  but time process x 2
+  # part scss not regenerate! only part head link font compress/digest/integrity/autowrite option change nothing, 
+  # see user / admin mode when regenerate
+  # cache_type: memory | filesystem | default: filesystem
+  #  Disable digesting by default in development. Digest by default in production.
+  digest: true
+  cache: false
+  # cache_type: filesystem
+  #
+  features:
+    # liquid: true | false | default: false
+    # integrity: true | false | default: false
+    # automatic_img_size: true | false | n(fixnum): 2,4,6,8 | default: true
+    # automatic_img_alt : true | false | default: true
+    automatic_img_size: false
+    automatic_img_alt: false
+
+
+# Plugin paginate
+# paginate: 5
+
+
+collections: 
+  coll_site:
+    output: false
+    permalink: /:path.html
+    title: coll_site  
+  coll_dataset:
+    output: true
+    permalink: /:path.html
+    title: coll_dataset  
+  pages:
+    output: true
+    permalink: /:path.html
+    title: pages
+ 
+
+collections_ext:
+  root_page: 'home'
+  # ! dependence : site.baseurl
+  url_extension_section: /index.html
+  url_extension_item: .html
+  path_extension_section: /index.md
+  path_extension_item: .md
+
+# Defaults
+defaults: 
+  # coll_site
+  - scope:
+      path: _coll_site
+      type: coll_site
+    values:
+      layout: 
+  # coll_dataset
+  - scope:
+      path: _coll_dataset
+      type: coll_dataset
+    values:
+      layout: 
+  # Pages
+  - scope:
+      path: _pages
+      type: pages
+    values:
+      layout:
+
+
+# Plugin: jekyll-picture-tag
+path_image_baseurl: images
+path_image_originals: images/_originals
+
+picture:
+  source: "images/_originals"
+  output: "images"
+  markup: "picture"
+  presets:
+    default:
+      ppi: [1]
+      source_720:
+        media: "(min-width: 1200px)"
+        width: "720"
+      source_670:
+        media: "(min-width: 768px)"
+        width: "670"
+      source_540:
+        media: "(min-width: 600px)"
+        width: "540"
+      source_default:
+        width: "320"
+    portfolio-thumbnail:
+      attr:
+        class: "img-responsive img-centered"
+        itemprop: "image"      
+      source_default:
+        width: "400"   
+    portfolio-header-image:
+      attr:
+        class: "img-responsive img-centered"
+        itemprop: "image"      
+      source_default:
+        width: "600"
+    about-timeline-miniature:
+      attr:
+        class: "img-responsive img-circle"
+        itemprop: "image"      
+      source_default:
+        width: "200"
+        height: "200" 
+    clients-miniature:
+      attr:
+        class: "img-responsive img-centered"
+        itemprop: "image"      
+      source_default:
+        width: "200"
+        height: "50"  
+    team-miniature:
+      attr:
+        class: "img-responsive img-circle"
+        itemprop: "image"      
+      source_default:
+        width: "225"
+        height: "225"
+    services-miniature:
+      attr:
+        class: "img-responsive img-centered img-circle"
+        itemprop: "image"      
+      source_default:
+        width: "112"
+        height: "112"  

@@ -1,0 +1,43 @@
+{
+  "list_activated_templates": 
+  [
+    "canvas_container",
+    "default_go_to_top_primary"   
+  ],
+
+
+	"id_page_top": "page-top",
+
+  "default_page_article_url": "article/index.html",
+  "default_detail_content_folder": "detailed-contents/",
+  "default_hash_prefix_article_url": "#!/",
+
+
+	"default_canvas_page_site": "container",
+  "default_canvas_page_detail": "container_lin_grad_45deg",
+  
+  "extra_param_page_templ":
+  [
+    {
+      "key" : "custom_canvas",
+      "key_param" : "custom_canvas_style",
+      "list_value": 
+      [
+        { 
+        	"id":"container",
+        	"param_type":"color"
+        },
+        { 
+        	"id":"container_lin_grad_45deg",
+        	"param_type":"color"
+        },
+        { 
+        	"id":"container_img_cover",
+        	"param_type":"image"
+        }
+
+      ]
+    }
+  ]   
+	
+}

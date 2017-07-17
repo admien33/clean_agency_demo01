@@ -1,0 +1,51 @@
+{% comment %}<!--
+  param in :
+  common-param :
+    meta_page
+    page
+  param out:
+    return html, part head
+ -->{% endcomment %}
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">  
+ 
+  {% include html_elt/head_meta_seo.html 
+    meta_page=meta_page
+  %}  
+
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+ {% comment %} <style type="text/css">
+    {% include coll_ext/site-config/add-css/head_style_critic.html %}
+  </style>{% endcomment %}
+
+  {% comment %}force custom template outide assets; gain time compilation site{% endcomment %}  
+  <style type="text/css">
+    {% include coll_ext/site-config/add-css/head_style_critic_filter_forced_custom.html %}
+  </style>
+  
+  
+  <script>
+    {% asset_source plugins/loadCSS.min.js %}
+    loadCSS("{% asset_path load_assets/noncritic.css %}");  
+    loadCSS("{% asset_path css/font-awesome.4.7.0.css %}");     
+  </script>
+  <noscript>
+    <link href="{% asset_path load_assets/noncritic.css %}" rel="stylesheet">   
+    <link href="{% asset_path css/font-awesome.4.7.0.css %}" rel="stylesheet">     
+  </noscript>
+
+  {% comment %} 
+  - add google font family link site-config/google-font/
+  {% endcomment %}
+  {% include coll_ext/site-config/add-html/head_link_google_font.html %} 
+  
+  {% comment %}{% feed_meta %}{% endcomment %}
+
+</head>

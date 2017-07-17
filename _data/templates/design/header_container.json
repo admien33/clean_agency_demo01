@@ -1,0 +1,18 @@
+{
+	"default":
+	{
+		"class":"Site-header"
+	},
+	"full_bg": 
+	{
+		"class":"Site-header-full"
+	},
+	"full_md_bg": 
+	{
+		"class":"Site-header-full-md"
+	},
+	"half_bg": 
+	{
+		"class":"Site-header-half"
+	},
+}

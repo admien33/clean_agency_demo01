@@ -1,0 +1,48 @@
+{
+	"template": "default_navbar_sections_dd_pages",
+	"coll_site": "site-config/navigation-pages/default_navbar_custom",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/pages/navigation/default_navbar_sections_dd_pages.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[		
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/pages/navigation/default_navbar_common_design.scss",
+				"templates/pages/navigation/default_navbar_dd_sections.scss",
+				"templates/pages/navigation/default_navbar_sections_dd_pages.scss"
+				
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "custom_page",
+			"path": 
+			[
+				"assets-js/dist/template_default_navbar_sections_pages.js"
+			]				
+		},
+		{
+			"added_on": "common_page_site",
+			"path": 
+			[
+				#// assets-js/dist/template_default_navbar_dd_sections added in /assets-js/dist/common.js
+
+			],
+			"state": "inactive"
+		}
+	]
+}

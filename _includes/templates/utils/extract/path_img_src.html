@@ -1,0 +1,23 @@
+{%comment%}
+<!--
+  param in:
+    include.path_image 
+  global
+    site.path_image
+    site.baseurl
+  param out :
+     path_img_src
+-->
+https://
+
+{%endcomment%}
+
+{% assign path_img_src = '' %}
+{% if include.path_image != null and include.path_image != '' %}
+	{% if include.path_image contains 'https://' %}
+		{% assign path_img_src = include.path_image %}
+	{% else %}	
+		{% assign path_img_src = include.path_image | prepend: '/'  | prepend: site.path_image_baseurl | prepend: '/'  %}
+		{% assign path_img_src = path_img_src | prepend: site.baseurl | replace: '//','/' %}
+	{% endif %}
+{% endif %}

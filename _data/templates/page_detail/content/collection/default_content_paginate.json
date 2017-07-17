@@ -1,0 +1,37 @@
+{
+	"template": "default_content_paginate",
+	
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/page_detail/content/default_content_paginate.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"bootstrap/pager",
+				"templates/pages/extra/pager_primary_style.scss"
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "common_page_detail",
+			"path": 
+			[
+			]
+			
+		}
+	]
+}
+

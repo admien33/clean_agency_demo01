@@ -1,0 +1,183 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+
+ -->{% endcomment %}
+
+{% comment %}specific, add html part modal : id_section and template_modal ref{% endcomment %}
+{% comment %} ! init array before loop on sections page template {% endcomment %}
+{% comment %}{% assign template_modal = 'portfolio_grid_modal_partModal' %}
+{% assign add_modal_html_template = add_modal_html_template | append: template_modal | append: delim %}
+{% assign add_modal_html_path_section = add_modal_html_path_section | append: path_section | append: delim %}
+{% assign add_modal_html_custom_path_items = add_modal_html_custom_path_items | append: custom_path_items | append: delim %}
+{% endcomment %}
+
+
+
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+{% assign size_subs_section_root = size_subs_section %}
+{% assign subs_section_root = subs_section %}
+
+{% assign custom_path_root = path_section %}
+{% if custom_path_items != null %}
+  {% assign custom_path_root = custom_path_items %}
+{% endif %}
+
+
+<section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
+    
+  {% comment %}root heading{% endcomment %}
+  {% comment %}
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h2 class="section-heading">{{meta_section.title}} </h2>
+      <h3 class="section-subheading text-muted">{{meta_section.description}}</h3>       
+    </div>
+  </div>
+  {% endcomment %}
+
+  {% for index_subs_section_root in (0..size_subs_section_root) %}
+
+    {% include coll_ext/extract/item/from_subs_section.html 
+      index=index_subs_section_root 
+      subs_section=subs_section_root 
+    %}
+    {% assign subsection_root = subsection %}
+
+    {% comment %}<h2>{{subsection_root.title}}</h2>
+    <h4>{{subsection_root.description}}</h2>{% endcomment %}
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">{{subsection_root.title}} </h2>
+        <h3 class="section-subheading text-muted">{{subsection_root.description}}</h3>       
+      </div>
+    </div>
+
+    {% assign name_id= null %}
+    {% include coll_ext/utils/url/extract_name_id_from_url.html
+      url=subsection_root.url
+    %}
+
+    {% assign custom_path_root_sub = custom_path_root | append: '/' | append: name_id %}
+    {% include coll_ext/extract/site_subsection.html 
+      path_section=path_section
+      custom_path_items= custom_path_root_sub
+    %}
+
+    <div class="row">
+      
+      {% for index_item in (0..size_direct_items) %}
+        {% include coll_ext/extract/item/from_direct.html index=index_item %}
+       
+        {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+           path_item=item.path
+           custom_path=custom_path_items
+           url_page_article=null
+        %} 
+        
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a href="{{url_detailed_article}}" class="portfolio-link" data-toggle="">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fa fa-plus fa-3x"></i>
+              </div>
+            </div>
+            {% if item.miniature_is_reduced_img == true %}
+            	{% picture portfolio-thumbnail {{item.image}} alt="{{item.title}}" %}
+            {% else %}
+            	{% picture portfolio-thumbnail {{item.miniature}} alt="{{item.title}}" %}                       
+            {% endif %}                    
+          </a>
+          <div class="portfolio-caption">
+            <h4>{{ item.title }}</h4>
+            {% comment %}<p class="text-muted">{{ item.subtitle }}</p>{% endcomment %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% comment %}+++++++++++++++++++++++++++++++++++++{% endcomment %}
+    {% comment %}subsections,1 loop sub, V1, see to  add n{% endcomment %}
+    {% if size_subs_section > -1 %}
+
+      {% assign size_subs_section_1child = size_subs_section %}
+      {% assign subs_section_1child = subs_section %}
+
+      {% assign title_section_ref = subsection_root.title %}
+
+      {% for index_subs_section_1child in (0..size_subs_section_1child) %}
+
+        {% include coll_ext/extract/item/from_subs_section.html 
+          index=index_subs_section_1child
+          subs_section=subs_section_1child 
+        %}
+        {% comment %}<h2 class="section-subheading text-muted"> {{title_section_ref}}-{{subsection.title}}</h2>
+        <h4>{{subsection.description}}</h2>{% endcomment %}
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h3 class="section-heading text-muted">{{subsection.title}}</h2>
+            {% comment %}<h4 class="section-subheading text-muted">{{subsection.description}}</h3>{% endcomment %}
+          </div>
+        </div>
+
+        {% assign name_id= null %}
+        {% include coll_ext/utils/url/extract_name_id_from_url.html
+          url=subsection.url
+        %}
+
+        {% assign custom_path_root_sub_1child = custom_path_root_sub | append: '/' | append: name_id %}
+        {% include coll_ext/extract/site_subsection.html 
+          path_section=path_section
+          custom_path_items= custom_path_root_sub_1child
+        %}        
+
+        <div class="row">
+          {% for index_item in (0..size_direct_items) %}
+            {% include coll_ext/extract/item/from_direct.html index=index_item %}
+
+            {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+               path_item=item.path
+               custom_path=custom_path_items
+               url_page_article=null
+            %}      
+            
+            <div class="col-md-4 col-sm-6 portfolio-item">
+              <a href="{{ url_detailed_article }}" class="portfolio-link" data-toggle="">
+                <div class="portfolio-hover">
+                  <div class="portfolio-hover-content">
+                    <i class="fa fa-plus fa-3x"></i>
+                  </div>
+                </div>
+                {% if item.miniature_is_reduced_img == true %}
+                  {% picture portfolio-thumbnail {{item.image}} alt="{{item.title}}" %}
+                {% else %}
+                  {% picture portfolio-thumbnail {{item.miniature}} alt="{{item.title}}" %}                       
+                {% endif %}                    
+              </a>
+              <div class="portfolio-caption">
+                <h4>{{ item.title }}</h4>
+                <p class="text-muted">{{ item.subtitle }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+      {% endfor %}
+      
+    {% endif %}
+  	
+  {% endfor %}
+
+</section>

@@ -1,0 +1,35 @@
+# Site wide configuration
+#specific virtual box
+
+url: http://192.168.56.2:4000
+
+# Plugin: jekyll-picture-tag
+picture:
+  url: http://192.168.56.2:4000
+
+# Site owner
+
+# owner:
+#   google:
+#     ad-client: ""
+#     ad-slot: ""
+#     analytics: ""
+#     verify: ""
+#   bing:
+#     verify: ""
+#   alexa:
+#     verify: ""
+#   yandex:
+#     verify: ""
+# disqus-shortname: mmistakes-dev
+
+
+# Plugin: jekyll-assets
+
+assets:
+  cache: false
+  compress:
+    css: false
+    js: true
+  features:
+    liquid: true

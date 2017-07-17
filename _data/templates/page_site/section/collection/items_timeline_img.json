@@ -1,0 +1,36 @@
+{
+	"template": "items_timeline_img",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/page_site/section/items_timeline_img.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"templates/page_site/section/items_timeline_img.scss"
+			]
+			
+		}
+	],
+	
+	"import_js":
+	[
+		{
+			"added_on": "common_page_site",
+			"path": 
+			[
+
+			]				
+		}
+	]
+}

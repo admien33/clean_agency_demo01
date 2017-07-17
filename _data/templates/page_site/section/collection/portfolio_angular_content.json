@@ -1,0 +1,62 @@
+{
+	"template": "portfolio_angular_content",
+	
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/page_site/section/portfolio_angular_content.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "custom_page_critic",
+			"path": 
+			[
+				#// V1, load on specific asset, add ext "_liq" & ".liquid" if needed and include custom var scss on template file
+				"templates/page_site/section/common_angular_content.scss"
+			],
+			"force_on_page": 
+			[
+				"article"
+			],
+			"path_force": 
+			[
+				#// V1, specific custom force to common on current page : need specific asset file
+				#// see list_force_custom_scss_on_page on templates/design/config
+				"templates/page_site/section/common_angular_content.scss"
+			]			
+		},		
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"bootstrap/pager",
+				"templates/pages/extra/pager_primary_style.scss"
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "custom_page",		
+			"path": 
+			[
+				"assets-js/dist/template_portfolio_angular.js"
+			]			
+		},
+		{
+			"added_on": "common_page_site",
+			"path": 
+			[
+
+			]				
+		}
+	]
+}
+

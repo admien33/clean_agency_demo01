@@ -1,0 +1,159 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+ -->{% endcomment %}
+
+{% assign row_col_presentation = "col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" %}
+{% assign row_col_items = "col-md-4" %}{% comment %}Update on current,depending param 'nb_items_row'{% endcomment %}
+
+{% assign display_item_title = 'true' %}{% comment %}type string! Update with 'display_item_title'{% endcomment %}
+{% assign display_item_fa_inv = 'true' %}{% comment %}type string! Update with 'display_item_fa_inv'{% endcomment %}
+{% assign nb_items_row_default = 3 %}{% comment %}Update with 'nb_items_row'{% endcomment %}
+{% assign centered_items_row = 'false' %}{% comment %}type string! Update with 'centered_items_row'{% endcomment %}
+
+{% comment %}extract data current section{% endcomment %}
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+{% comment %}+++++++++++++++++++++++++++++++++++++++++++++++++++++++{% endcomment %}
+{% comment %}specific, extract custom param {% endcomment %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='display_item_title'
+  list=list_param_template_section      
+%}
+{% if value_from_key != null %}
+  {% assign display_item_title = value_from_key %}
+{% endif %}
+{% comment %}{% endcomment %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='display_item_fa_inv'
+  list=list_param_template_section      
+%}
+{% if value_from_key != null %}
+  {% assign display_item_fa_inv = value_from_key %}
+{% endif %}
+{% comment %}{% endcomment %}
+{% assign nb_items_row = nb_items_row_default %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='nb_items_row'
+  list=list_param_template_section      
+%}
+{% if value_from_key != null %}
+  {% assign nb_items_row = value_from_key | plus: 0 %}
+{% endif %}
+{% comment %}{% endcomment %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='centered_items_row'
+  list=list_param_template_section      
+%}
+{% if value_from_key != null %}
+  {% assign centered_items_row = value_from_key %}
+{% endif %}
+{% comment %}+++++++++++++++++++++++++++++++++++++++++++++++++++++++{% endcomment %}
+
+{% comment %}+++++++++++++++++++++++++++++++++++++++++++++++++++++++{% endcomment %}
+{% comment %}Design row items, on col_md , V1{% endcomment %}
+{% assign max_col_ref_bootstrap = 12 %}
+{% assign bootsrap_class_ref = "col-md-" %}
+{% comment %}input : nb_items_row, nb_items_display {% endcomment %}
+{% assign nb_items_display = size_direct_items | plus: 1 %}
+{% comment %}output:{% endcomment %}
+{% assign class_col_md = row_col_items %}
+{% assign class_col_md_offset_first = null %}
+{% assign class_col_md_offset_last = null %}
+
+{% comment %}specific bootsrap responsive, size 12{% endcomment %}
+{% if nb_items_row > 6 and nb_items_row < 1 %}
+  {% assign size_col_md = 1 %}
+{% elsif nb_items_row > 4 %}
+  {% assign size_col_md = 2 %}
+{% else %}
+  {% assign size_col_md = max_col_ref_bootstrap | divided_by : nb_items_row %}
+{% endif %}
+
+
+{% comment %}note discrim size_direct_items /  size_all_items,depending loop {% endcomment %}
+{% assign sum_col_md = size_col_md | times: nb_items_display %}
+{% assign class_col_md = bootsrap_class_ref | append: size_col_md %}
+{% if sum_col_md < max_col_ref_bootstrap %}
+  {% assign diff_coll = max_col_ref_bootstrap | minus: sum_col_md %}
+  {% assign half_diff_coll = diff_coll | divided_by: 2 %}
+  {% if half_diff_coll > 0 %}
+    {% assign class_col_md_offset_first = bootsrap_class_ref | append: half_diff_coll %}    
+  {% endif %}
+  {% assign last_offset = diff_coll | minus: half_diff_coll %}
+  {% assign class_col_md_offset_last = bootsrap_class_ref | append: last_offset %}  
+{% endif %}
+{% comment %}+++++++++++++++++++++++++++++++++++++++++++++++++++++++{% endcomment %}
+
+
+
+<section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
+
+  {% comment %}row presentation{% endcomment %}
+  <div class="row text-center">
+    <div class="{{row_col_presentation}} text-center">
+      <h2 class="section-heading">{{meta_section.subtitle}}</h2>
+      <h3 class="section-subheading text-muted">{{meta_section.description}}</h3>
+    </div>
+  </div>
+
+  {% comment %}row items{% endcomment %}
+  <div class="row text-center">
+
+    {% if class_col_md_offset_first != null %}
+      <div class="{{class_col_md_offset_first}}"></div>
+    {% endif %}
+    {% comment %}loop items{% endcomment %}
+    {% for index_item in (0..size_direct_items) %}
+      {% include coll_ext/extract/item/from_direct.html index=index_item %}
+
+      <div class="{{class_col_md}}">        
+        {% if item.type-miniature == 'font-awesome' %}
+            {% if display_item_fa_inv == 'true' %}
+              <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                <i class="fa {{item.miniature}} fa-stack-1x fa-inverse"></i>
+              </span>
+            {% else %}
+              <span class="fa-stack fa-2x">
+                <i class="fa {{item.miniature}} fa-stack-2x text-primary"></i>
+              </span>
+            {% endif %}  
+        {% endif %}
+        {% if item.type-miniature == 'image-circle' %}
+          {% picture services-miniature {{item.miniature}} alt="service {{item.title}}" %}
+        {% endif %}
+        {% if display_item_title == 'true' %}
+          <h4 class="service-heading">{{item.title}}</h4>
+        {% endif %}          
+        <div class="text-muted">
+          {{item.content}}
+        </div>                   
+      </div>
+    {% endfor %}{% comment %}end loop items{% endcomment %}
+
+    {% if class_col_md_offset_last != null %}
+      <div class="{{class_col_md_offset_last}}"></div>
+    {% endif %}
+
+  </div>{% comment %}end row items{% endcomment %}
+
+  {% comment %}row last_words{% endcomment %}
+  <div class="row text-center">
+    <div class="{{row_col_presentation}} text-center">
+      <h3 class="section-subheading text-muted">{{meta_section.last_words}}</h3>    
+    </div>
+  </div>
+
+</section>

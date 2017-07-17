@@ -1,0 +1,35 @@
+{
+	"template": "items_text_img_fa",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/page_site/section/items_text_img_fa.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"templates/page_site/section/items_text_img_fa.scss"
+			]			
+		}
+	],
+	
+	"import_js":
+	[
+		{
+			"added_on": "common_page_site",
+			"path": 
+			[
+
+			]
+		}
+	]
+}

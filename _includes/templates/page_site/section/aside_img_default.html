@@ -1,0 +1,41 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+
+ -->{% endcomment %}
+
+{% assign row_col_items = "col-md-3 col-sm-6" %}
+
+{% comment %}extract data current section{% endcomment %}
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+<aside id="{{id_section}}" class="{{html_section_class}} aside_img_default" style="{{html_section_style}}">
+  <div class="row">   
+    {% for index_item in (0..size_direct_items) %}
+      {% include coll_ext/extract/item/from_direct.html index=index_item %}
+      
+      <div class="{{row_col_items}}">          
+        {% if item.link %}
+            <a href="{{item.link}}">
+        {% endif %}                
+        {% if item.type-miniature == 'image-centered' %}
+            {% picture clients-miniature {{item.miniature}} alt="{{meta_section.title}} {{item.title}}" %}
+        {% endif %}                
+        {% if item.link %}
+            </a>
+        {% endif %}
+      </div>      
+    {% endfor %}
+  </div>
+</aside>

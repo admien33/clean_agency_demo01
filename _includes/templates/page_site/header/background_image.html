@@ -1,0 +1,28 @@
+{%comment%}<!--
+param in :
+common_param:
+  meta_page
+param out :
+  html
+ -->{%endcomment%}
+
+
+
+{% comment %}extract path_img_src{% endcomment %}
+{% include templates/utils/extract/path_img_src.html 
+  path_image=meta_page.header_img
+%}
+
+<header class="intro-header" style="background-image: url({{path_img_src}})">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="site-heading">
+                    <h1>{{ meta_page.subtitle }}</h1>
+                    <hr class="small">
+                    <span class="subheading">{{ meta_page.description }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

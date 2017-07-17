@@ -1,0 +1,30 @@
+
+{  
+  "config":
+  {
+    "type": "font",
+    "source": "section"
+  },
+  "list-id":
+  [
+    {
+      "id" : "font-default-body"
+    }, 
+    {
+      "id" : "font-name-navbar-brand"
+    }, 
+    {
+      "id" : "font-primary"
+    },
+    {
+      "id" : "font-secondary"
+    }
+  ]   
+}
+
+
+// list of variables used in scss template file : /_assets/stylesheets/templates
+// format font  variable :  {{id}}_gl ; ex, font-default-body_gl
+// ! must correspond to filename items in section coll_site/site-config/google-font
+// update list if new item
+

@@ -1,0 +1,15 @@
+{% comment %}
+	note : assets-plugin, asset / asset_source tags, no information about current page process
+{% endcomment %}
+
+{% assign current_name_id_page = 'article' %}
+
+{% comment %}add Bootstrap 3.3.7 critic import, see list _data/scss/bootstrap_import.yml{% endcomment %}
+{% include coll_ext/site-config/add-scss/critic_bootstrap_import.html %}
+
+{% comment %}Custom common part for all pages page site, define in /_data/template/pages/common, template 'common_page_site' {% endcomment %}
+{% comment %}{% include coll_ext/site-config/add-scss/critic_template_common_page_site.html %}{% endcomment %}
+
+{% include coll_ext/site-config/add-scss/critic_template_common_page_site_add_force_custom.html 
+	current_page_site = current_name_id_page
+%}

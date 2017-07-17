@@ -1,0 +1,69 @@
+{% comment %}<!--
+  param in :
+  common_param:
+    id_section
+    path_section
+    html_section_class
+    html_section_style
+    list_param_template_section
+    custom_path_items
+  param out:
+    add html
+
+ -->{% endcomment %}
+
+
+{% include coll_ext/extract/site_subsection.html 
+  path_section=path_section
+  custom_path_items= custom_path_items
+%}
+
+{% for index_item in (0..size_all_items) %}
+  
+  {% include coll_ext/extract/item/from_all.html index=index_item %}
+
+  <div class="portfolio-modal modal fade" id="portfolioModal{{forloop.index}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+
+      <div class="close-modal" data-dismiss="modal">
+        <div class="lr">
+          <div class="rl">
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="modal-body">
+              <h2>{{ item.title }}</h2>
+              <hr class="star-primary">
+              
+              {% picture portfolio-header-image {{item.image}} alt="{{item.description-image}}" %}
+
+              <p>{{ item.description }}</p>
+              
+              <ul class="list-inline item-details">
+                <li>Client:
+                  <strong><a href="http://startbootstrap.com">{{ item.client }}</a>
+                  </strong>
+                </li>
+                <li>Date:
+                  <strong><a href="http://startbootstrap.com">{{ item.project-date }}</a>
+                  </strong>
+                </li>
+                <li>Service:
+                  <strong><a href="http://startbootstrap.com">{{ item.category }}</a>
+                  </strong>
+                </li>
+              </ul>
+              <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+            </div>
+          </div>
+        </div>
+      </div>{% comment %}/ .container{% endcomment %}
+      
+    </div>{% comment %}/ .modal-content{% endcomment %}
+  </div>
+
+{% endfor %}
