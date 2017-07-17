@@ -10,7 +10,7 @@ title: "Clean Agency"
 email: your-email@domain.com
 description: "Site web based on start bootstrap design!"
 # baseurl: ""
-baseurl: "/clean-agency-demo01" # the subpath of your site, e.g. /blog
+baseurl: "/clean_agency_demo01" # the subpath of your site, e.g. /blog
 # url: http://admien33.github.io # the base hostname & protocol for your site
 url: https://d2m.tech # the base hostname & protocol for your site
 

@@ -50,7 +50,7 @@ $(function() {
           // fields['subscribe']=subscribe;
           options['slug']=slug; 
           options['parent']='clean_blog contact'; //$("input#parent").val(); 
-          options['origin']="https://admien33.github.io/clean-agency-demo01/"; //$("input#origin").val(); 
+          options['origin']="https://admien33.github.io/clean_agency_demo01/"; //$("input#origin").val(); 
           options['gotcha']=$("input#gotcha").val(); 
           //add info page
 

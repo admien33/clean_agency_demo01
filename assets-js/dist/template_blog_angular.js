@@ -38,7 +38,7 @@ $(document).ready(function () {
 		  window.location.reload();
 		});	
 
-		var url_list_items = '/clean-agency-demo01/blog_articles.json';
+		var url_list_items = '/clean_agency_demo01/blog_articles.json';
 		var list_items={};
   	var size_list_items=-1;	
 
@@ -203,7 +203,7 @@ $(document).ready(function () {
 			 	window.location.reload();
 			}
 
-      $http.get('/clean-agency-demo01/blog_articles.json').success(function(response) {
+      $http.get('/clean_agency_demo01/blog_articles.json').success(function(response) {
         self.articles = response.list;
         self.baseUrl = response.config.url_page_index + response.config.hash_prefix;       
       });

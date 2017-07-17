@@ -34,7 +34,7 @@ $(document).ready(function () {
 		    window.location.reload();
 		});
 
-		var url_list_items = '/clean-agency-demo01/portfolio_articles.json';
+		var url_list_items = '/clean_agency_demo01/portfolio_articles.json';
 		var list_items={};
   	var size_list_items=-1;	
 
@@ -142,7 +142,7 @@ $(document).ready(function () {
 		  }
 		});
 
-    // $http.get('/clean-agency-demo01/posts.json').success(function(data) {
+    // $http.get('/clean_agency_demo01/posts.json').success(function(data) {
     //   $scope.posts = data.posts;
     // });
 
@@ -180,7 +180,7 @@ $(document).ready(function () {
       var self = this;
       self.orderProp = 'name';
 
-      $http.get('/clean-agency-demo01/portfolio_articles.json').success(function(response) {
+      $http.get('/clean_agency_demo01/portfolio_articles.json').success(function(response) {
         self.articles = response.list;
       });
     }]
