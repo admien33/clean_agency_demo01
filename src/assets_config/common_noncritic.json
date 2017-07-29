@@ -1,0 +1,26 @@
+---
+layout: compress
+---
+
+{% capture data_import_scss %}
+	{% include coll_ext/site-config/add-scss/noncritic_bootstrap_import.html %}
+	{% include coll_ext/site-config/add-scss/noncritic_template_import.html %}
+{% endcapture %}
+
+
+{
+  "pages":
+  [
+		{
+			"id": "common_noncritic",
+		  "import_scss": "{{data_import_scss}}",
+		  "import_js": ""
+		}
+	],
+  "config":
+  {
+  	"var_custom_style": "",
+  	"delim_import_js": ""  	
+  }
+}
+

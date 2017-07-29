@@ -1,0 +1,134 @@
+{% comment %}<!--
+  param in :
+  common-param :
+    meta_page
+    page
+  param out:
+    return html, part head
+ -->{% endcomment %}
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">  
+ 
+  {% include html_elt/head_meta_seo.html 
+    meta_page=meta_page
+  %}  
+
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+
+  {% if site.webpack_assets.active == true %}
+    {% comment %}no compress option with assets plugin, gain build time, factor 3{% endcomment %}
+
+    {% comment %} css critic part {% endcomment %}
+    <style type="text/css">
+      {% for commonfile in site.webpack_assets.css.common_critic %}
+        {% asset_source {{commonfile}} %}
+      {% endfor %}
+      {% if site.webpack_assets.css.add_custom_on_pages %}
+        {% asset_source {{name_id_page}} %}
+      {% endif %}     
+    </style>
+    {% comment %}{% asset_source common_critic %}{% endcomment %}
+    {% comment %}{% asset_source {{name_id_page}} %}{% endcomment %}
+    {% comment %}test with assets put on _includes/, no gain on build time compare to assets plugin{% endcomment %}
+    {% comment %}{% assign path_css_page = 'assets_css_critic/' | append: name_id_page | append: '.css' %}
+    <style type="text/css">
+      {% include  assets_css_critic/common_critic.css %}
+      {% include {{path_css_page}}  %}
+    </style>   {% endcomment %} 
+
+     
+    <script>
+      {% asset_source plugins/loadCSS.min.js %}
+      {% for commonfile in site.webpack_assets.css.common_noncritic %}
+         loadCSS("{% asset_path {{commonfile}} %}");
+      {% endfor %}
+    </script>
+    {% comment %}
+    <script>
+      {% asset_source plugins/loadCSS.min.js %}
+      loadCSS("{% asset_path common_noncritic.css %}");  
+      loadCSS("{% asset_path css/font-awesome.4.7.0.css %}");     
+    </script>
+    {% endcomment %}
+    
+      
+       
+    <noscript>
+      {% for commonfile in site.webpack_assets.css.common_noncritic %}
+        <link href="{% asset_path {{commonfile}} %}" rel="stylesheet"> 
+      {% endfor %}
+    </noscript>
+    {% comment %}
+    <noscript>
+      <link href="{% asset_path common_noncritic.css %}" rel="stylesheet">   
+      <link href="{% asset_path css/font-awesome.4.7.0.css %}" rel="stylesheet">     
+    </noscript>
+    {% endcomment %}
+ 
+    {% comment %}
+      Note : test with no assets plugin,
+        - commment on Gemfile and config.yml : 
+        - on root, add common_noncritic.css : 
+                      ---
+                      layout: compress
+                      ---
+                      {% capture include_to_scssify %}
+                        {% include assets_css_critic/common_noncritic.css %}   
+                      {% endcapture %}
+                      {{ include_to_scssify | scssify | strip_newlines  }}
+        - no font-awesome, no hash on filename (could be done on webpack, but must be filtering on jekyll!)
+        - build time : ~5.4 s
+
+        - case assets-plugin - but critic assets css added on include - fontawesome : ~5.4s
+
+        - case assets-plugin - fontawesome : ~5.4s ++
+    
+      - see asset_path on scss on webpack ! add image on webpack !
+    {% endcomment %}
+
+  {% else %}
+
+    {% comment %}<style type="text/css">
+      {% include coll_ext/site-config/add-css/head_style_critic.html %}
+    </style>{% endcomment %}
+    {% comment %}force custom template outide assets; gain build time: 20s -> 15s,
+     assets build on webpack, build time: 5.5s!, with same content, no compress with assets plugin {% endcomment %}  
+    <style type="text/css">
+      {% include coll_ext/site-config/add-css/head_style_critic_filter_forced_custom.html %}
+    </style>
+
+     <script>
+      {% asset_source plugins/loadCSS.min.js %}
+      loadCSS("{% asset_path load_assets/noncritic.css %}");  
+      loadCSS("{% asset_path css/font-awesome.4.7.0.css %}");     
+    </script>    
+    <noscript>
+      <link href="{% asset_path load_assets/noncritic.css %}" rel="stylesheet">   
+      <link href="{% asset_path css/font-awesome.4.7.0.css %}" rel="stylesheet">     
+    </noscript>
+
+  {% endif %}
+  
+
+
+  {% comment %} base needed on angularjs - $location service on html5 mode{% endcomment %}
+  {% comment %}default hashbang mode used, V1; 
+  jekyll need permalink /blog/index.html; but in html5 mode, index.html is filtering, see rewrite url ?{% endcomment %}
+  {% comment %}<base href="{{page.url | prepend: site.baseurl | prepend: site.url}}">{% endcomment %}
+
+
+  {% comment %} 
+  - add google font family link site-config/google-font/
+  {% endcomment %}
+  {% include coll_ext/site-config/add-html/head_link_google_font.html %} 
+  
+  {% comment %}{% feed_meta %}{% endcomment %}
+
+</head>

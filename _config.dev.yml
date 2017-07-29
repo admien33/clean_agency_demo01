@@ -29,6 +29,6 @@ assets:
   cache: false
   compress:
     css: false
-    js: true
+    js: false
   features:
     liquid: true

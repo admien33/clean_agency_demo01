@@ -1,0 +1,34 @@
+{
+	"template": "common",	
+	"import_scss":
+	[
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/pages/base/main.scss",
+				"templates/pages/extra/canvas_container.scss",
+				"templates/pages/extra/container_flex.scss"
+			]			
+		},
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+
+			]			
+		}
+	],
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",			
+			"path": 
+			[
+				"template_default_common.js"
+				#// "vendor.js",
+				#// "common.js"
+			]			
+		}
+	]
+}

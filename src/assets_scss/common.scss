@@ -1,0 +1,21 @@
+@import "minima";
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// react components
+
+#root,#container_posts {
+  animation: fadeIn 1s;
+}
+
+#root {
+  background-color: $primary-color;
+}

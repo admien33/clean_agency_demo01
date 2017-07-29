@@ -16,11 +16,9 @@ url: https://d2m.tech # the base hostname & protocol for your site
 
 lang: en
 
-
-
-# twitter_username: lacasebiocoutras
-# github_username:  lacasebiocoutras
-# words_per_minute: 150
+# webpack integration, modify default src
+source: ./src
+# destination: ./_site
 
 
 # Jekyll configuration
@@ -62,35 +60,16 @@ compress_html:
 keep_files: [images]
 
 exclude:
-  - gulp
-  - node_modules
-  - .asset-cache
-  - .editorconfig
-  - .gitignore
-  - .jshintrc
-  - .ruby-version
-  - Gemfile*
-  - README.md
-  - autoprefixer.yml
-  - gulpfile.js
-  - package.json
-  - _site/
-  - .code-highlighter-cache
-  - Rakefile.rb
-  - vendor
-  - .travis.yml
-  - deploy.sh
-  - deploy_init.sh
-  - assets-js/app
-  - assets-js/node_modules
-  - assets-js/package.json
-  - assets-js/webpack.config.js
+  - .asset-cache 
+  - assets_config
+  - assets_js/app
+  - assets_scss
 
 # Plugins
 whitelist:
 
 plugins:
-  - jekyll-assets # generate locally !
+  - jekyll-assets
   # - jekyll-sitemap
   # - jekyll-paginate
   # - jekyll-feed
@@ -102,13 +81,15 @@ assets:
     - _assets/font-awesome
     - _assets/images
     - _assets/js
-    - _assets/stylesheets   
+    - _assets/css
+    - _assets/css_wp
+    # - _assets/stylesheets   
   #
   compress:
     # css: false | true | default - development: false, production: true
     # js: false | true | default - development: false, production: true
-    css: true
-    js: true
+    css: false
+    js: false
   #
   # autowrite: true
   # cache: false | directory | default: .asset-cache
@@ -128,6 +109,35 @@ assets:
     # automatic_img_alt : true | false | default: true
     automatic_img_size: false
     automatic_img_alt: false
+
+
+webpack_assets :
+  active: true
+  _assets_ref_path: "./_assets/"
+  js:
+    # webpack not compatible with jekyll-assets, if add hash on filename, must be done on webpack
+    path_ref: "./assets_js/"
+    dir_app: "app"
+    dir_dist: "dist"
+    # path_app: "./assets_js/app/"
+    # path_dist: "./assets_js/dist/"
+    common:
+      - "vendor.js"
+      - "common_critic.js"
+    add_custom_on_pages: true
+  css:
+    # default mode : assets generated on webpack are processed with plugin jekyll-assets, see /_includes/html_elt/head.html
+    # path dist relative to assets.source dirs, default : webpack put css assets on "_assets/css_wp"
+    _assets_dir: "css_wp"
+    path_scss: "./assets_scss/"    
+    common_critic:
+      - "common_critic.css"
+    common_noncritic:
+      - "common_noncritic.css"
+      # local jekyll _assets
+      - "css/font-awesome.4.7.0.css"
+    add_custom_on_pages: true
+
 
 
 # Plugin paginate

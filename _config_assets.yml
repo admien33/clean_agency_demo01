@@ -1,0 +1,85 @@
+# ++++++++++++++++++++++++++++++++++++++++
+# Custom config assets build :
+
+baseurl: ""
+url: ""
+
+source: ./src
+destination: ./_site_assets_config
+
+custom_assets_config:
+  list: 
+    - "./common_critic.json"
+    - "./common_noncritic.json"
+    - "./custom_pages_site.json"
+  webpack_base_dir: "./webpack"
+  webpack_js_dir: "./js"
+  webpack_scss_dir: "./scss"
+  
+
+# _layouts/compress.html
+compress_html:
+  clippings: all
+  endings: all
+  comments: all # ["<!--", "-->"]
+
+# ! note : coll_dataset with json will be generated too, cause /src/_plugins/jekyll-json-dataset.rb
+exclude:
+  - _pages
+  - index.html
+  - posts.json
+  - portfolio_articles.json
+  - blog_articles.json
+  - images
+  - assets_js
+  - assets_scss
+  - coll_dataset
+  - favicons
+  - feed.xml 
+  - .asset-cache
+
+
+collections: 
+  coll_site:
+    output: false
+    permalink: /:path.html
+    title: coll_site  
+  coll_dataset:
+    output: true
+    permalink: /:path.html
+    title: coll_dataset  
+  pages:
+    output: true
+    permalink: /:path.html
+    title: pages
+ 
+
+collections_ext:
+  root_page: 'home'
+  # ! dependence : site.baseurl
+  url_extension_section: /index.html
+  url_extension_item: .html
+  path_extension_section: /index.md
+  path_extension_item: .md
+
+# Defaults
+defaults: 
+  # coll_site
+  - scope:
+      path: _coll_site
+      type: coll_site
+    values:
+      layout: 
+  # coll_dataset
+  - scope:
+      path: _coll_dataset
+      type: coll_dataset
+    values:
+      layout: 
+  # Pages
+  - scope:
+      path: _pages
+      type: pages
+    values:
+      layout:
+

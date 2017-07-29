@@ -1,9 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'autoprefixer-rails'
-gem 'uglifier'
-gem 'breakpoint'
-gem 'stringex'
 
 # Jekyll
 gem 'jekyll'
@@ -23,6 +19,12 @@ group :jekyll_plugins do
 	# gem 'jekyll-paginate'
 	# gem 'jekyll-feed'
 end
+
+# gem 'autoprefixer-rails'
+# gem 'uglifier'
+# gem 'breakpoint'
+# gem 'stringex'
+
 
 # gem 'autoprefixer-rails', '~> 6.7.7.1'
 # gem 'uglifier', '~> 3.1.13'

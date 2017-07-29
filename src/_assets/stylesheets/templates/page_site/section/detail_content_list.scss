@@ -1,0 +1,45 @@
+//{% include coll_ext/site-config/add-scss-var/custom_style.html %}
+//{% comment %} Active include if scss template is not added on :  {% endcomment %}
+//{% comment %}  - common lists of /_data/template/pages/common.yml {% endcomment %}
+//{% comment %}  - 'noncritic_add' part of a file in subfolders /_data/template/page* {% endcomment %}
+//{% comment %} AND if custom sass defined site-config are needed, see /_data/scss/var_config{% endcomment %}
+//{% comment %} note: file extension '.liquid' MUST be added : template.scss.liquid {% endcomment %}
+
+.post-preview > a {
+  color: #404040;
+}
+.post-preview > a:hover,
+.post-preview > a:focus {
+  text-decoration: none;
+  color: $color_primary_gl;
+}
+.post-preview > a > .post-title {
+  font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.post-preview > a > .post-description {
+  margin: 0;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+.post-preview > .post-meta {
+  color: #808080;
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 0;
+}
+.post-preview > .post-meta > a {
+  text-decoration: none;
+  color: #404040;
+}
+.post-preview > .post-meta > a:hover,
+.post-preview > .post-meta > a:focus {
+  color: $color_primary_gl;
+  text-decoration: underline;
+}
+@media only screen and (min-width: 768px) {
+  .post-preview > a > .post-title {
+    font-size: 36px;
+  }
+}
