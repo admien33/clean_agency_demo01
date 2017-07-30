@@ -1,1 +1,1 @@
-webpackJsonp([4],{18:function(n,c,t){"use strict";t(19),t(2),t(20)},19:function(n,c,t){"use strict";(function(n){n(document).ready(function(){n(".carousel").carousel({interval:5e3})})}).call(c,t(0))},20:function(n,c){}},[18]);
+webpackJsonp([4],{18:function(n,c,t){"use strict";t(19),t(3),t(20)},19:function(n,c,t){"use strict";(function(n){n(document).ready(function(){n(".carousel").carousel({interval:5e3})})}).call(c,t(0))},20:function(n,c){}},[18]);
