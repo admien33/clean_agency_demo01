@@ -127,7 +127,9 @@
   {% comment %} 
   - add google font family link site-config/google-font/
   {% endcomment %}
-  {% include coll_ext/site-config/add-html/head_link_google_font.html %} 
+  {% comment %}{% include coll_ext/site-config/add-html/head_link_google_font.html %}{% endcomment %}
+  {% comment %}webfont script and no script link stylesheet{% endcomment %}
+  {% include coll_ext/site-config/add-html/head_link_google_font_webfontjs.html %}
   
   {% comment %}{% feed_meta %}{% endcomment %}
 

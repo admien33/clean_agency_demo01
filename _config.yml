@@ -145,6 +145,12 @@ webpack_assets :
     # path_output  default js ouput :  "./assets/dist/"
 
 
+angular_app:
+  # activate_on : "all_pages","custom_pages"
+  activate_on : "custom_pages"
+  name_ng_app: "JekyllApp"
+  # template_ref, signature must be find on template json filename
+  template_sign: "angular"
 
 # Plugin paginate
 # paginate: 5

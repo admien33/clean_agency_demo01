@@ -10,7 +10,13 @@ layout: compress
   {% comment %}Head pages{% endcomment %}
   {% include html_elt/head.html %}
 
-  <body id="{{site.data.templates.pages.extra.config.id_page_top}}" ng-app="JekyllApp">
+  {% comment %}add angularjs tag {% endcomment %}
+  {% assign ang_tag = 'ng-app="' | append: site.angular_app.name_ng_app | append: '"' %}
+  {% unless site.angular_app.activate_on == "all_pages" %}
+    {% include coll_ext/html_elt/pages/filter_ang_tag_custom_page.html %}    
+  {% endunless %}
+
+  <body id="{{site.data.templates.pages.extra.config.id_page_top}}" {{ang_tag}} >
   {% comment %}note : add angularjs directive ng-app, by default, used or not{% endcomment %}
 
     {% comment %}default or custom background canvas, see /_data/templates/pages/extra/config.json{% endcomment %}

@@ -65,7 +65,7 @@ const alias_path_template_js = 'alias_path_template_js';
 const list_entry = {};
 
 //on entry, push default vendor; fixed, could be push on config file
-list_entry[output_dir_js+'/vendor'] = ['jquery','bootstrap'];
+list_entry[output_dir_js+'/vendor'] = ['jquery','bootstrap','angular'];
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 assets_conf_list.forEach ( asset => {
