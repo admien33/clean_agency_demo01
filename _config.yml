@@ -61,9 +61,10 @@ keep_files: [images]
 
 exclude:
   - .asset-cache 
-  - assets_config
-  - assets_js/app
-  - assets_scss
+  - assets/config
+  - assets/js
+  - assets/scss
+  - assets/images
 
 # Plugins
 whitelist:
@@ -79,9 +80,9 @@ plugins:
 assets:
   sources:    
     - _assets/font-awesome
-    - _assets/images
+    # - _assets/images
     - _assets/js
-    - _assets/css
+    # - _assets/css
     - _assets/css_wp
     # - _assets/stylesheets   
   #
@@ -113,30 +114,33 @@ assets:
 
 webpack_assets :
   active: true
-  _assets_ref_path: "./_assets/"
+  # assets_ref_path: "./assets/"
+  # _assets_ref_path: "./_assets/"
   js:
     # webpack not compatible with jekyll-assets, if add hash on filename, must be done on webpack
-    path_ref: "./assets_js/"
-    dir_app: "app"
-    dir_dist: "dist"
-    # path_app: "./assets_js/app/"
-    # path_dist: "./assets_js/dist/"
+    path_input: "./assets/js/"
+    path_output: "./assets/"
+    input_dir: "app"
+    output_dir: "dist"   
     common:
       - "vendor.js"
       - "common_critic.js"
     add_custom_on_pages: true
   css:
     # default mode : assets generated on webpack are processed with plugin jekyll-assets, see /_includes/html_elt/head.html
-    # path dist relative to assets.source dirs, default : webpack put css assets on "_assets/css_wp"
-    _assets_dir: "css_wp"
-    path_scss: "./assets_scss/"    
+    # assets_ouput relative to site.assets.source defined repos, default : webpack put css assets on "_assets/css_wp"    
+    path_input: "./assets/scss/"
+    assets_ouput: "css_wp"
     common_critic:
       - "common_critic.css"
     common_noncritic:
       - "common_noncritic.css"
-      # local jekyll _assets
+      # local jekyll _assets, temp
       - "css/font-awesome.4.7.0.css"
     add_custom_on_pages: true
+  images:
+    path_input: "./assets/images/"
+    # path_output  default js ouput :  "./assets/dist/"
 
 
 

@@ -8,13 +8,15 @@ source: ./src
 destination: ./_site_assets_config
 
 custom_assets_config:
+  dir: "./assets/config"
   list: 
     - "./common_critic.json"
     - "./common_noncritic.json"
     - "./custom_pages_site.json"
-  webpack_base_dir: "./webpack"
-  webpack_js_dir: "./js"
-  webpack_scss_dir: "./scss"
+  webpack_base_path: "./webpack/"
+  webpack_output_path: "./webpack/output/assets/"
+  # webpack_js_dir: "./js"
+  # webpack_scss_dir: "./scss"
   
 
 # _layouts/compress.html
@@ -31,8 +33,10 @@ exclude:
   - portfolio_articles.json
   - blog_articles.json
   - images
-  - assets_js
-  - assets_scss
+  - assets/js
+  - assets/scss
+  - assets/img
+  - assets/font
   - coll_dataset
   - favicons
   - feed.xml 

@@ -4,9 +4,8 @@ _site_assets_config
 src/.sass-cache
 src/.asset-cache
 src/.jekyll-metadata
-src/assets_js/dist
+src/assets/dist
 src/_assets/css_wp
-webpack/css
-webpack/js
+webpack
 src/_data/coll_ext
 src/_includes/coll_ext

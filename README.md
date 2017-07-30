@@ -30,3 +30,4 @@ Then, build jekyll site
 
 
 First attempts to integrate angularJS on detail items via Webpack
+

@@ -1,0 +1,61 @@
+//{% include coll_ext/site-config/add-scss-var/custom_style.html %}
+//{% comment %} Active include if scss template is not added on :  {% endcomment %}
+//{% comment %}  - common lists of /_data/template/pages/common.yml {% endcomment %}
+//{% comment %}  - 'noncritic_add' part of a file in subfolders /_data/template/page* {% endcomment %}
+//{% comment %} AND if custom sass defined site-config are needed, see /_data/scss/var_config{% endcomment %}
+//{% comment %} note: file extension '.liquid' MUST be added : template.scss.liquid {% endcomment %}
+
+.cd-top {
+  z-index: 999;
+  display: none;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 0;
+  right: 0.8em;
+  box-shadow: 0 0 10px rgba(#000, .05);
+  /* image replacement properties */
+  overflow: hidden; 
+  text-indent: 100%;
+  white-space: nowrap;
+  // background: $color_primary_gl url(asset_path('cd-top-arrow.svg')) no-repeat center 50%;
+  background: $color_primary_gl url('cd-top-arrow.svg') no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s 0s, visibility 0s .3s, bottom 1s ease;
+
+  &.cd-is-visible, &.cd-fade-out, .no-touch &:hover {
+    
+    transition: opacity .3s 0s, visibility 0s 0s;
+  }
+
+  &.cd-is-visible { /* the button becomes visible */
+    display: inline-block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &.cd-fade-out { /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+    opacity: .5;
+  }
+
+  .no-touch &:hover {
+    background-color: rgba($color_primary_gl, 1);
+    opacity: 1;
+  }
+
+}
+// @media only screen and (min-width: 768px) {
+//   .cd-top {
+//     right: 20px;
+//     bottom: 20px;
+//   }
+// }
+// @media only screen and (min-width: 1024px) {
+//   .cd-top {
+//     height: 60px;
+//     width: 60px;
+//     right: 30px;
+//     bottom: 30px;
+//   }
+// }
