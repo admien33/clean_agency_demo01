@@ -24,6 +24,12 @@ Custom libs is required: src/_includes/coll_ext, src/_data/coll_ext
 		npm run build-wp /serve-wp
 
 
+todo : 
+	
+	- add hash on assets js + list hashed filenames used during jekyll build
+
+
+
 ### Then, build jekyll site
 
 	bundle exec jekyll build / serve
