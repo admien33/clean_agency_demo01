@@ -25,9 +25,6 @@ const input_dir_js = config_yml.webpack_assets.js.input_dir || 'app';
 const output_dir_js = config_yml.webpack_assets.js.output_dir || 'dist';
 const output_dir_css  = config_yml.webpack_assets.css.assets_ouput || 'css_wp';
 
-// const assets_ref_path = config_yml.webpack_assets.assets_ref_path || './assets/';
-// const _assets_ref_path = config_yml.webpack_assets._assets_ref_path || './_assets/';
-
 let path_tmp = config_path_input_js + input_dir_js + '/';
 const path_input_js = path.resolve(__dirname,config_source,path_tmp);
 
@@ -36,6 +33,9 @@ const path_assets_scss = path.resolve(__dirname,config_source,path_tmp);
 
 path_tmp = config_yml.webpack_assets.images.path_input || './assets/images/';
 const path_ref_img = path.resolve(__dirname,config_source,path_tmp);
+
+path_tmp = config_yml.webpack_assets.fonts.path_input || './assets/fonts/';
+const path_ref_font = path.resolve(__dirname,config_source,path_tmp);
 
 // +++++++++
 
@@ -51,7 +51,7 @@ const assets_wp_base = path.resolve(__dirname, path_tmp);
 path_tmp = assets_yml.custom_assets_config.webpack_output_path || './webpack/ouput/assets/';
 const assets_wp_ouput = path.resolve(__dirname, path_tmp);
 
-fse.ensureDirSync(assets_wp_base);
+fse.removeSync(assets_wp_base);
 fse.ensureDirSync(assets_wp_ouput);
 
 
@@ -100,8 +100,10 @@ assets_conf_list.forEach ( asset => {
  });
 })
 
-// asset image, used on css
+// asset images, used on css
 fse.copySync(path_ref_img, assets_wp_base)
+// asset fonts, used on css
+fse.copySync(path_ref_font, assets_wp_base)
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -146,18 +148,7 @@ const config = {
             { 
               loader: 'postcss-loader', 
               options: {
-                // config: {
-                //   path: path.resolve(__dirname,config_source,_assets_ref_path)
-                // }
-                // plugins: {
-                //   'postcss-assets': {},
-                //   'autoprefixer': {}
-                // }
                 plugins: (loader) => [
-                  // require('postcss-assets')({
-                  //   // to evaluate, need post-css 5.2.0 + add calipers, calipers-png, ...
-                  //   //  loadPaths: ['src/assets_image/']
-                  // }),
                   require('autoprefixer')()
                 ]
               }
@@ -170,25 +161,27 @@ const config = {
             }
           ]
         })
-      }
-      ,
+      },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10
-
-        }
+        test: /\.(png|jpg|gif)$/, loader: 'url-loader',
+        options: {limit: 8192}
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader',
+        options: {limit: 10000, mimetype: 'image/svg+xml'}
+      },
+      {
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader',
+        options: {limit: 10000, mimetype: 'application/font-woff'}
+      },     
+      {
+        test: /\.[ot]tf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader',
+        options: {limit: 10000, mimetype: 'application/octet-stream'}
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader',
+        options: {limit: 10000, mimetype: 'application/vnd.ms-fontobject'}
       }
-      // {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
-      // {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
-      // {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
-      // {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
-      // {
-      //   test: [/MaterialIcons-Regular.eot/, /MaterialIcons-Regular.woff2/, /MaterialIcons-Regular.woff/, /MaterialIcons-Regular.ttf/],
-      //   loader: 'file?name=fonts/[name].[ext]'
-      // }
-
     ]
    
   },
@@ -216,11 +209,7 @@ const config = {
       'window.$': 'jquery'
     }),
     new WebpackShellPlugin({
-      // onBuildStart: [onBuildStart_script],
-      onBuildEnd: ['node webpack.postprocess.js'],
-      
-      // onBuildEnd: [onBuildEnd_script],
-      // onBuildExit: ['echo "onBuildExit"'],
+      onBuildEnd: ['node webpack.postprocess.js'],      
       safe: true
     })
     
@@ -249,39 +238,37 @@ const config = {
 module.exports = config;
 
 
-// plugin 
-// Emit a JSON file with assets paths
-    // https://github.com/sporto/assets-webpack-plugin#options
-// new AssetsPlugin({
-//   path: path.resolve(__dirname, './public/dist'),
-//   filename: 'assets.json',
-//   prettyPrint: true,
-// }),
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+// integration 'postcss-assets', todo evaluate
+// plugin called on 'postcss-loader'  : 
+        // options: {
+        //   plugins: (loader) => [
+        //     require('postcss-assets')({
+        //       // to evaluate, need post-css 5.2.0 + add calipers, calipers-png, ...
+        //       //  loadPaths: ['src/assets_image/']
+        //     }),
+        //     require('autoprefixer')()
+        //   ]
+        // }
+// on package json, add:
+// "postcss": "^5.2.0", // ! pb v >= 6
+// "postcss-assets": "^4.2.0",
+// "calipers": "^2.0.0",
+// "calipers-gif": "^2.0.0",
+// "calipers-jpeg": "^2.0.0",
+// "calipers-png": "^2.0.0",
 
-//recup hash on jekyll build
-
-
-// rules: [    
-//   {
-//     test: /\.(png|jpg|gif|svg)$/,
-//     loader: 'url-loader',
-//     options: {
-//       limit: 10000
-//     }
-//   }
-// ]
-
-//output path,public-path
-// https://stackoverflow.com/questions/28846814/what-does-publicpath-in-webpack-do
-// case image, cdn,
-
-// publicPath is used by webpack for the replacing relative path defined in your css for refering image and font file. 
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+// "react": "^15.6.1",
+// "react-addons-update": "^15.6.0",
+// "react-dom": "^15.6.1",
 
 
-// - 'browser-sync-webpack-plugin'
-// WebpackShellPlugin
 
-//immages module : 
+
+
+
+//compress images assets : 
 
 // {
 //     test: /\.(jpe?g|png|gif)$/,
@@ -310,8 +297,5 @@ module.exports = config;
 
 
 // package json
- // "postcss": "^6.0.8",
-    // "postcss-assets": "^4.2.0",
-    // "react": "^15.6.1",
-    // "react-addons-update": "^15.6.0",
-    // "react-dom": "^15.6.1",
+ 
+    

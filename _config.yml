@@ -79,13 +79,9 @@ plugins:
 # Plugin: jekyll-assets
 assets:
   sources:    
-    - _assets/font-awesome
-    # - _assets/images
     - _assets/js
-    # - _assets/css
-    - _assets/css_wp
-    # - _assets/stylesheets   
-  #
+    # css_wp required on webpack_assets, css.assets_ouput
+    - _assets/css_wp  
   compress:
     # css: false | true | default - development: false, production: true
     # js: false | true | default - development: false, production: true
@@ -136,10 +132,14 @@ webpack_assets :
     common_noncritic:
       - "common_noncritic.css"
       # local jekyll _assets, temp
-      - "css/font-awesome.4.7.0.css"
+      # - "css/font-awesome.4.7.0.css"
+      #font-awesome added on templates/pages/common.json, import_scss -> common_non_critic 
     add_custom_on_pages: true
   images:
     path_input: "./assets/images/"
+    # path_output  default js ouput :  "./assets/dist/"
+  fonts:
+    path_input: "./assets/fonts/"
     # path_output  default js ouput :  "./assets/dist/"
 
 

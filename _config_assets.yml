@@ -15,9 +15,7 @@ custom_assets_config:
     - "./custom_pages_site.json"
   webpack_base_path: "./webpack/"
   webpack_output_path: "./webpack/output/assets/"
-  # webpack_js_dir: "./js"
-  # webpack_scss_dir: "./scss"
-  
+
 
 # _layouts/compress.html
 compress_html:
@@ -33,10 +31,11 @@ exclude:
   - portfolio_articles.json
   - blog_articles.json
   - images
+  - assets/dist
   - assets/js
   - assets/scss
-  - assets/img
-  - assets/font
+  - assets/images
+  - assets/fonts
   - coll_dataset
   - favicons
   - feed.xml 
