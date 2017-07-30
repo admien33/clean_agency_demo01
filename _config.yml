@@ -66,6 +66,7 @@ exclude:
   - assets/scss
   - assets/images
   - assets/fonts
+  - _assets/stylesheets
 
 # Plugins
 whitelist:

@@ -1,0 +1,129 @@
+//{% include coll_ext/site-config/add-scss-var/custom_style.html %}
+//{% comment %} Active include if scss template is not added on :  {% endcomment %}
+//{% comment %}  - common lists of /_data/template/pages/common.yml {% endcomment %}
+//{% comment %}  - 'noncritic_add' part of a file in subfolders /_data/template/page* {% endcomment %}
+//{% comment %} AND if custom sass defined site-config are needed, see /_data/scss/var_config{% endcomment %}
+//{% comment %} note: file extension '.liquid' MUST be added : template.scss.liquid {% endcomment %}
+
+header.btn-home {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  background-size: cover; 
+  background-position: center;
+  background-attachment: scroll;
+  // background-image: add custom style on html
+  // background-image: url('../img/header.jpg');
+  text-align: center;
+  color: white;
+}
+header.btn-home .header-content {
+  position: relative;
+  text-align: center;
+  padding: 100px 15px 100px;
+  width: 100%;
+}
+header.btn-home .header-content .header-content-inner h1 {
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px;
+}
+header.btn-home .header-content .header-content-inner hr {
+  margin: 30px auto;
+}
+header.btn-home .header-content .header-content-inner p {
+  font-weight: 300;
+  color: rgba(white, 0.7);
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+@media (min-width: 768px) {
+  header.btn-home {
+    min-height: 100%;    
+  }
+  header.btn-home .header-content {
+    position: absolute;
+    top: 50%;  
+    transform: translateY(-50%);
+    padding: 0 50px;
+  }
+  header.btn-home .header-content .header-content-inner {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  header.btn-home .header-content .header-content-inner h1 {
+    font-size: 50px;
+  }
+  header.btn-home .header-content .header-content-inner p {
+    font-size: 18px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// header.btn-home {
+//     text-align: center;
+//     color: #fff;
+//     background-attachment: scroll;
+//     /*background-image: add custom */
+//     background-position: center center;
+//     background-repeat: none;    
+//     background-size: cover;
+
+//     // background-position: center;
+//     // position: relative;
+//     // width: 100%;
+//     // min-height: auto;
+// }
+
+// header.btn-home .intro-text {
+//     padding-top: 100px;
+//     padding-bottom: 50px;
+// }
+
+// header.btn-home .intro-text h1, .intro-lead-in {
+//     margin-bottom: 25px;
+//     text-transform: none;
+//     font-family: $font_secondary_gl;
+//     font-size: 22px;
+//     font-style: italic;
+//     font-weight: 300;
+//     line-height: 22px;
+// }
+
+// header.btn-home .intro-text p, .intro-heading {
+//     margin-bottom: 25px;
+//     text-transform: uppercase;
+//     font-family: $font_primary_gl;
+//     font-size: 50px;
+//     font-weight: 700;
+//     line-height: 50px;
+// }
+
+// @media(min-width:768px) {
+//     header.btn-home .intro-text {
+//         padding-top: 300px;
+//         padding-bottom: 200px;
+//     }
+
+//     header.btn-home .intro-text h1, .intro-lead-in {
+//         margin-bottom: 25px;
+//         font-family: $font_secondary_gl;
+//         font-size: 40px;
+//         font-style: italic;
+//         line-height: 40px;
+//     }
+
+//     header.btn-home .intro-text p, .intro-heading {
+//         margin-bottom: 50px;
+//         text-transform: uppercase;
+//         font-family: $font_primary_gl;
+//         font-size: 75px;
+//         font-weight: 700;
+//         line-height: 75px;
+//     }
+// }

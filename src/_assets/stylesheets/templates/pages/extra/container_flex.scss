@@ -1,0 +1,69 @@
+//{% include coll_ext/site-config/add-scss-var/custom_style.html %}
+//{% comment %} Active include if scss template is not added on :  {% endcomment %}
+//{% comment %}  - common lists of /_data/template/pages/common.yml {% endcomment %}
+//{% comment %}  - 'noncritic_add' part of a file in subfolders /_data/template/page* {% endcomment %}
+//{% comment %} AND if custom sass defined site-config are needed, see /_data/scss/var_config{% endcomment %}
+//{% comment %} note: file extension '.liquid' MUST be added : template.scss.liquid {% endcomment %}
+
+
+/**
+ * Container flex
+ */
+
+.Site-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  //custom style
+  padding: 0 !important;
+}
+
+.Site-header,
+.Site-header-full,
+.Site-header-full-md,
+.Site-header-half,
+.Site-footer {
+  flex: none;
+}
+
+.Site-header-full {
+
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+}
+
+.Site-header-full-md {
+
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+}
+
+.Site-header-half {
+  height: 50%;
+}
+
+.Site-main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  
+  //custom style
+  padding: 1em 2em; //15px; 
+
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#main {
+  animation: fadeIn 1s;
+}

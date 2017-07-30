@@ -239,6 +239,7 @@ module.exports = config;
 
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++
+// https://github.com/borodean/postcss-assets
 // integration 'postcss-assets', todo evaluate
 // plugin called on 'postcss-loader'  : 
         // options: {
