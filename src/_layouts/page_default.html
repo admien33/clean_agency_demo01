@@ -10,11 +10,14 @@ layout: compress
   {% comment %}Head pages{% endcomment %}
   {% include html_elt/head.html %}
 
-  {% comment %}add angularjs tag {% endcomment %}
-  {% assign ang_tag = 'ng-app="' | append: site.angular_app.name_ng_app | append: '"' %}
-  {% unless site.angular_app.activate_on == "all_pages" %}
-    {% include coll_ext/html_elt/pages/filter_ang_tag_custom_page.html %}    
-  {% endunless %}
+  {% comment %}add angularjs tag if needed{% endcomment %}
+  {% assign ang_tag = '' %}
+  {% if site.angular_app.active %}
+    {% assign ang_tag = 'ng-app="' | append: site.angular_app.name_ng_app | append: '"' %}
+    {% unless site.angular_app.activate_on == "all_pages" %}
+      {% include coll_ext/html_elt/pages/filter_ang_tag_custom_page.html %}    
+    {% endunless %}
+  {% endif %}  
 
   <body id="{{site.data.templates.pages.extra.config.id_page_top}}" {{ang_tag}} >
   {% comment %}note : add angularjs directive ng-app, by default, used or not{% endcomment %}

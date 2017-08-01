@@ -146,6 +146,7 @@ webpack_assets :
 
 
 angular_app:
+  active: true
   # activate_on : "all_pages","custom_pages"
   activate_on : "custom_pages"
   name_ng_app: "JekyllApp"
