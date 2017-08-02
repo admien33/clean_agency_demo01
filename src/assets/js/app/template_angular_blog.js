@@ -42,7 +42,7 @@ jekyllApp.controller('ContentCtrl', ['$scope', '$http', '$location', function($s
 		});
 	});	
 
-	var url_list_items = '/clean_agency_demo01/blog_articles.json';
+	var url_list_items = BASE_URL+'/blog_articles.json';
 	var list_items={};
 	var size_list_items=-1;
 
@@ -165,44 +165,21 @@ jekyllApp.controller('ContentCtrl', ['$scope', '$http', '$location', function($s
 
 
 jekyllApp.component('searchBlog', {
-	// templateUrl: '/assets_js/template-angular/searchBlog.html',
-  template: 
-    '<div class="row">'+
-			'<div class="col-lg-12">'+
-				'<div class="col-lg-8 col-md-6">'+
-					'<p><i class="fa fa-search" aria-hidden="true"></i><input ng-model="$ctrl.query"></p>'+
-				'</div>'+
-				'<div class="col-lg-4 col-md-6">'+
-					'<p>Sort by:'+
-						'<select ng-model="$ctrl.orderProp">'+
-							'<option value="title">Alphabetical</option>'+
-							'<option value="meta_date">Newest</option>'+
-						'</select>'+
-					'</p>'+
-				'</div>'+
-			'</div>'+
-		'</div>'+
- 
-    '<div class="row" ng-repeat="article in $ctrl.articles | filter:$ctrl.query | orderBy:$ctrl.orderProp">'+
-	    '<div class="post-preview">'+
-        '<a ng-click="$ctrl.click()" href="{{$ctrl.baseUrl}}{{article.path_folder}}{{article.name_id}}">'+       
-          '<h2 class="post-title">'+
-            '{{ article.title }}'+
-          '</h2>'+
-          '<h3 class="post-description">'+
-            '{{ article.description }}'+
-          '</h3>'+
-        '</a>'+
-      	'<p class="post-meta">'+
-          'Posted on {{ article.meta_date}}'+
-        '</p>'+
-
-      '</div>'+
-      '<hr>'+
-    '</div>',
-  controller: ['$http', function BlogListController($http) {
+	// script ng-template /src/_includes/templates/page_site/section/blog_angular_content.html
+	templateUrl: 'templateSearchBlog.html',
+	//ko, todo analyse 
+	// bindings: {
+ //    orderProp: '=',
+ //    articles: '=',
+ //    baseUrl: '='
+ //  },
+  controller: ['$http', '$scope', function BlogListController($http,$scope) {
     var self = this;
-    self.orderProp = 'meta_date';
+    self.orderProp = '-raw_date';
+
+    // $scope.myHTML =
+    //  'I am an <code>HTML</code>string with ' +
+    //  '<a href="#">links!</a> and other <em>stuff</em>';
 
 		self.click = function(){
 			setTimeout(function(){
@@ -210,10 +187,12 @@ jekyllApp.component('searchBlog', {
 			});
 		}
 
-    $http.get('/clean_agency_demo01/blog_articles.json').then(function onSuccess(response) {
+    $http.get(BASE_URL+'/blog_articles.json').then(function onSuccess(response) {
     	let data = response.data;
       self.articles = data.list;
       self.baseUrl = data.config.url_page_index + data.config.hash_prefix;       
     });
   }]
 });
+
+

@@ -67,7 +67,8 @@ layout: compress
     	"name_id" : "{{name_id}}",
       "path_folder": "{{path_folder_article}}",
     	"path_json" : "{{path_json}}",
-    	"title" : "{{item.subtitle | escape }}",    
+    	"title" : "{{item.subtitle | escape }}",
+      "raw_date" : "{{item.date-publication}}",
       "meta_date" : "{{item.date-publication | date: "%B %-d, %Y"}}",
       "path_header_img" : "{{path_img_src}}",
       "description" : "{{item.description | strip_html | strip }}"    

@@ -1,7 +1,4 @@
-
-
 import "angular";
-
 	
 	
 var jekyllApp=angular.module('JekyllApp', []);
@@ -21,12 +18,9 @@ jekyllApp.config(['$compileProvider', '$locationProvider', function ($compilePro
 
 jekyllApp.controller('ContentCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
-	var url_list_items_ref = '/clean_agency_demo01/portfolio_articles.json';
+	var url_list_items_ref = BASE_URL+'/portfolio_articles.json';
 	var element_ref = 'article';
 	var visibility_ref = 'invArticle';
-
-	console.log('$location.path() : '+$location.path());
-
 
 	// html template
 	var $article= $(element_ref);
@@ -170,34 +164,18 @@ jekyllApp.controller('ContentCtrl', ['$scope', '$http', '$location', function($s
 
 
 jekyllApp.component('searchPortfolio', {
-  template: 
-    '<div class="row">'+
-			'<div class="col-lg-4 col-md-6">'+
-				'<p>Search:<input ng-model="$ctrl.query"></p>'+
-					'<p>Sort by:'+
-					'<select ng-model="$ctrl.orderProp">'+
-						'<option value="name">Alphabetical</option>'+
-						'<option value="age">Newest</option>'+
-					'</select>'+
-				'</p>'+
-			'</div>'+
-	    '<div class="col-lg-8 col-md-6">'+
-	    	'<ul class="articles">'+
-	    		'<li ng-repeat="article in $ctrl.articles | filter:$ctrl.query | orderBy:$ctrl.orderProp">'+
-	    			'<span>{{article.title}}</span>'+
-	    		'</li>'+
-	      '</ul>'+
-	    '</div>'+
-	  '</div>',
+	templateUrl: 'templateSearchPortfolio.html',
   controller: ['$http', function PortfolioListController($http) {
     var self = this;
-    self.orderProp = 'name';
+    self.orderProp = '-raw_date'; 
 
-    $http.get('/clean_agency_demo01/portfolio_articles.json').
+    $http.get(BASE_URL+'/portfolio_articles.json').
     // success(function(response) {
     then(function onSuccess(response){
     	let data = response.data;
       self.articles = data.list;
-    });
+    });  	
+
   }]
 });
+
