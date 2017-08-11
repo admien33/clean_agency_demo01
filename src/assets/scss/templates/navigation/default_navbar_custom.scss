@@ -1,0 +1,60 @@
+
+#mainDefaultNavCustom {  
+  //specific
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+}
+
+
+//@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 768px) 
+{
+  #mainDefaultNavCustom.is-fixed {  
+    
+    width: 100%;
+    //force value with sum (margin-right + padding-right)
+    // see default_navbar_common_design.scss
+    padding-right: 20px !important;
+  }
+
+  #mainDefaultNavCustom 
+  {   
+    transition: background-color 0.3s;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+  #mainDefaultNavCustom.is-fixed 
+  {
+    /* when the user scrolls down, we hide the header right above the viewport */
+    position: fixed;
+    top: -61px;
+    background-color: rgba(white, 0.9);
+    border-bottom: 1px solid #f2f2f2;
+    transition: transform 0.3s;
+  }
+  #mainDefaultNavCustom.is-fixed .navbar-brand 
+  {
+    color: #404040;
+  }
+  #mainDefaultNavCustom.is-fixed .navbar-brand:hover,
+  #mainDefaultNavCustom.is-fixed .navbar-brand:focus 
+  {
+    color: $color_primary_gl;
+  }
+  #mainDefaultNavCustom.is-fixed .nav li a 
+  {
+    color: #404040;
+  }
+  #mainDefaultNavCustom.is-fixed .nav li a:hover,
+  #mainDefaultNavCustom.is-fixed .nav li a:focus 
+  {
+    color: $color_primary_gl;
+  }
+  #mainDefaultNavCustom.is-visible 
+  {
+    /* if the user changes the scrolling direction, we show the header */ 
+    transform: translate3d(0, 100%, 0);
+  }
+}

@@ -66,7 +66,6 @@ exclude:
   - assets/scss
   - assets/images
   - assets/fonts
-  - _assets/stylesheets
 
 # Plugins
 whitelist:
@@ -87,6 +86,7 @@ assets:
   compress:
     # css: false | true | default - development: false, production: true
     # js: false | true | default - development: false, production: true
+    # both false with webpacked assets
     css: false
     js: false
   #
@@ -114,12 +114,16 @@ webpack_assets :
   active: true
   # assets_ref_path: "./assets/"
   # _assets_ref_path: "./_assets/"
+  path_data_custom_assets: './webpacked_assets/'
   js:
     # webpack not compatible with jekyll-assets, if add hash on filename, must be done on webpack
     path_input: "./assets/js/"
-    path_output: "./assets/"
-    input_dir: "app"
+    input_dir: ""
+    path_components: "./components/"
+    path_output: "./assets/"    
     output_dir: "dist"   
+    # common js files, if modify,or new ones, adapt webpack.config
+    # vendor common libs directly added in webpack.config
     common:
       - "vendor.js"
       - "common_critic.js"
@@ -132,11 +136,10 @@ webpack_assets :
     common_critic:
       - "common_critic.css"
     common_noncritic:
-      - "common_noncritic.css"
-      # local jekyll _assets, temp
-      # - "css/font-awesome.4.7.0.css"
-      #font-awesome added on templates/pages/common.json, import_scss -> common_non_critic 
+      - "common_noncritic.css"    
     add_custom_on_pages: true
+    #list page custom critic css  with, key : name_id_page, values: 'empty','add_custom' 
+    json_custom_assets : 'custom_page_css.json'
   images:
     path_input: "./assets/images/"
     # path_output  default js ouput :  "./assets/dist/"
@@ -155,6 +158,9 @@ angular_app:
 
 # Plugin paginate
 # paginate: 5
+
+staticman:
+  url: "https://arcane-woodland-50389.herokuapp.com/v2/entry/admien33/d2m.tech/staticman_data/comments"
 
 
 collections: 

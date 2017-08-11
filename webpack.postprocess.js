@@ -12,6 +12,10 @@ const output_dir_css  = config_yml.webpack_assets.css.assets_ouput || 'css_wp';
 
 const _assets_ref_path = config_yml.webpack_assets._assets_ref_path || './_assets/';
 
+const data_dir_jekyll =   config_yml.data_dir || './_data/';
+const path_data_custom_assets = config_yml.webpack_assets.path_data_custom_assets || './webpacked_assets/'; 
+const json_custom_assets = config_yml.webpack_assets.css.json_custom_assets || 'custom_page_css.json'; 
+
 //++++++
 
 const assets_yml = yaml.safeLoad(fs.readFileSync('./_config_assets.yml', 'utf8'));
@@ -32,6 +36,23 @@ const path_dest_js = path.resolve(__dirname,config_source,path_tmp);
 
 path_tmp = _assets_ref_path + output_dir_css;
 const path_dest_css = path.resolve(__dirname,config_source,path_tmp);
+
+
+// info empty/add_custom assets critic css
+let list_asset_css = {};
+let assets_css = fs.readdirSync(path_output_css);
+assets_css.forEach ( (asset) => {
+	let asset_src = path.resolve(path_output_css,asset);
+	const data = fse.readFileSync(asset_src, 'utf8');	
+	let index_ext = asset.lastIndexOf('.');
+	let asset_name_id = asset.substring(0,index_ext);
+	list_asset_css[asset_name_id] = (data.trim() !== '') ? 'add_custom' : 'empty';	
+});
+const path_json_dir = path.resolve(__dirname,config_source,data_dir_jekyll,path_data_custom_assets);
+fse.ensureDirSync(path_json_dir);
+const path_json_file = path.resolve(path_json_dir,json_custom_assets);
+fse.writeJsonSync(path_json_file, list_asset_css);
+
 
 
 fse.moveSync(path_output_js, path_dest_js, { overwrite: true });

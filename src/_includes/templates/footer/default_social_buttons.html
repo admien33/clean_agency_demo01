@@ -1,0 +1,50 @@
+{%comment%}<!--
+param in :
+common_param:
+  meta_section
+  direct_items
+  size_direct_items ...
+ 	site
+param out :
+  html template
+ -->{%endcomment%}
+
+
+<hr>
+
+<!-- <footer> -->
+  <!-- <div class="container"> -->
+
+    <div class="row">
+  
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">     
+      
+        {% for index_item in (0..size_direct_items) %}          
+          {% include coll_ext/extract/item/from_direct.html index=index_item %}
+
+            {% assign content_liquify = item.content | liquify %}
+            {% assign content_tmp = content_liquify | markdownify %}                      
+             
+            {% if item.element-ref == 'span' %}
+              <span class="{{item.element-id}} text-muted">{{content_tmp | strip_html }}</span>
+
+            {% elsif item.element-ref == 'list' %}
+              {% if content_tmp contains '<ul>' %}
+                 
+                {% assign ul_inline = '<ul class="list-inline ' | append: item.element-id | append: '">' %}
+                {% assign content_adapt = content_tmp | replace_first: '<ul>', ul_inline %}
+
+                {{content_adapt}}
+                                
+              {% endif %}                                                
+            {% endif %}                     
+         
+        {% endfor %}
+
+      </div>
+
+    </div>
+  <!-- </div> -->
+<!-- </footer> -->
+
+

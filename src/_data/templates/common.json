@@ -1,0 +1,34 @@
+{
+	"template": "common",	
+	"import_scss":
+	[
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/_base/main.scss",
+				"templates/_extra/canvas_container.scss",
+				"templates/_extra/container_flex.scss",
+				"templates/section/common_design.scss",
+				"templates/navigation/default_navbar_custom.scss"
+			]			
+		},
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"font-awesome/font-awesome.4.7.0.scss"
+			]			
+		}
+	],
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",			
+			"path": 
+			[
+				"template_default_common.js"			
+			]			
+		}
+	]
+}

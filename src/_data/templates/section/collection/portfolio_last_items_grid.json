@@ -1,0 +1,38 @@
+{
+	"template": "portfolio_last_items_grid",
+	"import_html_extra_class": "portfolio_gm",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/section/portfolio_last_items_grid.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"bootstrap/pager",
+				"templates/_extra/pager_primary_style.scss",
+				"templates/section/portfolio_grid_modal.scss"
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+				
+			]			
+		}
+	]
+}

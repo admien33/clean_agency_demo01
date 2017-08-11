@@ -1,6 +1,6 @@
 require 'json'
 
-# from https://gist.github.com/esmevane/01ae111d292796e22e1e
+# adapted from https://gist.github.com/esmevane/01ae111d292796e22e1e
 
 module Jekyll
 
@@ -13,7 +13,7 @@ module Jekyll
         @site = site
         @base = base
         @dir  = dir
-        @name = 'test' 
+        @name = 'jeykll' 
         # post.data.fetch('name')
         @post = post
         self.process @name

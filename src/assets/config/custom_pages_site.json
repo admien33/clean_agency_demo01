@@ -36,7 +36,7 @@ path_subsection = "pages-site/"
 			{% if name_id_cps == '404' %}
 				{% assign ext_page = site.collections_ext.url_extension_item %}
 			{% endif %}
-			{% assign page_url_cps = page_url_cps | append: name_id | append: ext_page %}
+			{% assign page_url_cps = page_url_cps | append: name_id_cps | append: ext_page %}
 		{% endunless %}
 
 		{% include coll_ext/extract/site_page.html 
@@ -44,24 +44,20 @@ path_subsection = "pages-site/"
 		%}
 
 		{% comment %}import scss{% endcomment %}
-		{% assign list_custom_import_scss = '' %}
-		{% include coll_ext/site-config/add-css/head_style_critic_filter_forced_custom.html
-			not_ouput_hmtl=true
-		%}		
+		{% assign list_custom_import_scss = '' %}	
+		{% include coll_ext/site-config/add-scss/template_custom_critic_page_site.html %}
 		{% for index_import in (0..size_scss_import)  %}  
-			{% assign _import = array_scss_import[index_import] | replace: '.scss', '' | replace: '.liquid','' | strip %}
-			{% comment %}temp{% endcomment %}
-			{% assign _import = _import | replace: '_liq','' %}
-		  {% assign import_scss = '@import ' | append: "'" | append: _import | append: "';" %}
+			{% assign _import = array_scss_import[index_import] | replace: '.scss', '' | strip %}
+			{% assign import_scss = '@import ' | append: "'" | append: _import | append: "';" %}
 		  {% assign list_custom_import_scss = list_custom_import_scss | append: import_scss %}
 	  {% endfor %}
 
 
 	  {% comment %}import js{% endcomment %}
 	  {% assign list_custom_import_js = '' %}
-	  {% include coll_ext/site-config/add-html/js.html
+	 
+	  {% include coll_ext/site-config/add-html/js_list_import_page.html
 	  	force_nocustom_template2default=true
-	  	not_ouput_hmtl=true
 	  %}
 	  {% assign list_custom_import_js = list_js_import | remove_first: delim %}
 	  {% if list_custom_import_js != "" %}
@@ -71,7 +67,7 @@ path_subsection = "pages-site/"
 	  {% endif %}
 
 		{% comment %}<!-- json data -->{% endcomment %}		{
-			"id":"{{name_id_cps}}",
+			"id":"{{name_id_cps}}",			
 			"import_scss": "{{list_custom_import_scss}}",
 			"import_js": "{{list_custom_import_js}}"
 

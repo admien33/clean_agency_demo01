@@ -26,6 +26,7 @@ compress_html:
 # ! note : coll_dataset with json will be generated too, cause /src/_plugins/jekyll-json-dataset.rb
 exclude:
   - _pages
+  - _coll_dataset
   - index.html
   - posts.json
   - portfolio_articles.json
@@ -35,8 +36,7 @@ exclude:
   - assets/js
   - assets/scss
   - assets/images
-  - assets/fonts
-  - coll_dataset
+  - assets/fonts  
   - favicons
   - feed.xml 
   - .asset-cache

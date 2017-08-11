@@ -1,0 +1,37 @@
+
+#mainNavSectionsFixed .navbar-header .navbar-brand {
+  //specific
+  pointer-events: none;
+  cursor: default;
+}
+#mainNavSectionsFixed.affix .navbar-header .navbar-brand {
+  pointer-events: auto;
+  cursor: pointer;
+}
+//https://stackoverflow.com/questions/2717480/css-selector-for-first-element-with-class/8539107#8539107
+//simulate :first-of-class
+#mainNavSectionsFixed ul.nav .link_page_navbar {
+	border-top: 2px solid rgba(#333333, 0.7);
+	border-left: 0;
+}
+#mainNavSectionsFixed ul.nav .link_page_navbar ~ .link_page_navbar {
+	border-top: 0;
+}
+@media only screen and (min-width: 768px) 
+{
+	#mainNavSectionsFixed ul.nav .link_page_navbar {
+		border-top:0;
+		border-left: 2px solid rgba(white, 0.7);
+	}
+	#mainNavSectionsFixed ul.nav .link_page_navbar ~ .link_page_navbar {
+		border-left: 0;
+	}
+	#mainNavSectionsFixed.affix ul.nav .link_page_navbar,
+	#mainNavSectionsFixed.darken ul.nav .link_page_navbar {
+		border-left: 2px solid rgba(#333333, 0.7);
+	}
+	#mainNavSectionsFixed.affix ul.nav .link_page_navbar ~ .link_page_navbar,
+	#mainNavSectionsFixed.darken ul.nav .link_page_navbar ~ .link_page_navbar {
+		border-left: 0;
+	}	
+}

@@ -1,5 +1,6 @@
 ---
 layout : null
+permalink: portfolio/round-icons.html
 title: Round Icons
 subtitle: Graphic Design
 date-publication: 2015-07-15 12-00-00

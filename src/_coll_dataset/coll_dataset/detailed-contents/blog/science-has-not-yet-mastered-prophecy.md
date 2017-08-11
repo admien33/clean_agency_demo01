@@ -1,5 +1,6 @@
 ---
 layout : null
+permalink: blog/science-has-not-yet-mastered-prophecy.html
 title : Science has not yet mastered prophecy
 date-publication : 2014-08-24 12-00-00
 order : 1

@@ -1,0 +1,43 @@
+{
+	"template": "contact_stman_recaptcha_list",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/section/contact_stman_recaptcha_list.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "custom_page_critic",
+			"path": 
+			[
+				"templates/section/contact_stman_recaptcha_list.scss"
+			]
+		},		
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "custom_page",			
+			"path": 
+			[
+				"template_contact_stman_recaptcha.js"
+			]
+			
+		}
+	]
+}

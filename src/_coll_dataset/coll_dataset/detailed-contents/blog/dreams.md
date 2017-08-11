@@ -1,5 +1,6 @@
 ---
 layout : null
+permalink: blog/dreams.html
 title : Dreams
 date-publication : 2014-07-01 12-00-00
 order: 1

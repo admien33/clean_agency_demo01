@@ -1,5 +1,6 @@
 ---
 layout : null
+permalink: portfolio/escape.html
 title: Escape
 subtitle: Graphic Design
 date-publication: 2014-07-17 12-00-00

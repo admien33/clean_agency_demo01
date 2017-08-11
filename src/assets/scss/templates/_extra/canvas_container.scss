@@ -1,0 +1,44 @@
+
+/**
+ * Canvas
+ */
+
+[canvas] {
+  z-index: 1;
+}
+
+[canvas=container],
+[canvas=container_lin_grad_45deg],
+[canvas=container_img_cover] {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll; //auto; //scroll
+  overflow-x: hidden;
+  background-color: $color_bg_site_gl;
+  @include clearfix;
+}
+
+
+
+[canvas=container_lin_grad_45deg] {
+ 
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
+  background-attachment: fixed;
+  background-size: 50px 50px;
+}
+
+// specific custom with image url add on style html
+[canvas=container_img_cover] {
+ 
+  // background-image:  url('../img/bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center; 
+  background-attachment: fixed;  
+  background-size: cover;
+}
+
+
+

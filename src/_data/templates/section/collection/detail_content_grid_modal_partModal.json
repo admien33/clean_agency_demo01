@@ -1,0 +1,34 @@
+{
+	"template": "detail_content_grid_modal_partModal",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/section/detail_content_grid_modal_partModal.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+
+			]			
+		}
+	],
+	
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+			]				
+		}
+	]
+}

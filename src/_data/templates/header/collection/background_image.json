@@ -1,0 +1,36 @@
+{
+	"template": "background_image",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/header/background_image.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[		
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/header/background_image.scss"
+			]			
+		}
+	],
+	
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+
+			]				
+		}
+	]
+}
+

@@ -1,0 +1,89 @@
+{%comment%}<!--
+param in :
+common_param:
+  list_param_page_template
+  meta_section
+  direct_items, size_direct_items
+param out :
+  html template
+ -->{%endcomment%}
+
+{% comment %}extract custom param{% endcomment %}
+{% assign class_style_bg_navbar = '' %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='type_bg_navig'
+  list=list_param_page_template      
+%}
+{% if value_from_key != null %}
+  {% assign class_style_bg_navbar = value_from_key %}
+{% endif %}
+
+{% comment %}Navigation{% endcomment %}
+<nav id="mainNavSectionsFixed" class="navbar navbar-default navbar-fixed-top {{class_style_bg_navbar}}">
+ 
+  {% comment %}Brand and toggle get grouped for better mobile display{% endcomment %}
+  <div class="navbar-header">   
+    <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span><span class="not-inf-xsm">Menu</span>&nbsp;<i class="fa fa-bars"></i>       
+    </button>
+    <a class="navbar-brand page-scroll" href="#{{site.data.templates._extra.config.id_page_top}}">{{site.title}}</a>
+  </div>
+
+  {% comment %}Collect the nav links, forms, and other content for toggling{% endcomment %}
+  <div class="navbar-collapse collapse hidden_collapse_navig" id="bs-navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-right">
+      
+      {% comment %}Loop on sections page{% endcomment %}
+      {% for index_section in (0..size_sections_page) %}
+
+        {% comment %}return "item_section" from sections_page{% endcomment %}
+        {% include coll_ext/extract/item/from_sections_page.html index=index_section %}
+
+        {% include coll_ext/utils/list/extract_value_from_key.html 
+          key='section_navig'
+          list=item_section.list_param_template      
+        %}
+        {% assign section_navig = value_from_key %}
+    
+        {% if section_navig != null%}
+        
+          {% comment %}extract name_id section from url{% endcomment %}
+          {% assign name_id= null %}
+          {% include coll_ext/utils/url/extract_name_id_from_url.html 
+            url=item_section.url
+          %}
+          {% assign id_section_curr = name_id_page | append: '-' | append: name_id %}
+          <li>
+            <a class="page-scroll" href="#{{id_section_curr}}">{{section_navig}}</a>
+          </li>
+
+          {% if forloop.first == true %}
+            {% assign name_id_first = name_id %}
+          {% endif %}
+
+        {% endif %}
+      {% endfor %}
+
+      {% comment %}add pages link if defined{% endcomment %}
+      {% if size_direct_items > -1 %}
+        <li class="divider"></li>
+      {% endif %}
+      {% for index_item in (0..size_direct_items) %}
+          {% include coll_ext/extract/item/from_direct.html index=index_item %}
+
+          {% assign link_nav = item.link %}
+          {% assign add_class = '' %}
+          {% if forloop.first == true %}
+            {% assign add_class = 'link_page_navbar' %}            
+          {% endif %}
+
+          <li class="{{add_class}}">
+            <a href="{{ link_nav | prepend: site.baseurl }}">{{ item.title }}</a>
+          </li>
+
+        {% endfor %}
+
+    </ul>
+  </div> {% comment %}/.navbar-collapse{% endcomment %}
+
+</nav>

@@ -1,0 +1,44 @@
+{
+	"template": "default_social_buttons_home",
+	"coll_site": "site-config/footer/default_social_buttons_home",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/footer/default_social_buttons_home.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "custom_page_critic",
+			"path": 
+			[
+				"templates/footer/default_social_buttons_home.scss"			
+			]
+		},
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+
+			]
+		}
+	]
+}
+

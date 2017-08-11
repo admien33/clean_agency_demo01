@@ -1,0 +1,36 @@
+{
+	"template": "aside_img_default",
+	#// "import_html_extra_class": "aside_img_default",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/section/aside_img_default.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"templates/section/aside_img_default.scss"
+			]			
+		}
+	],
+	
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+
+			]				
+		}
+	]
+}

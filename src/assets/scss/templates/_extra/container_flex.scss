@@ -1,0 +1,62 @@
+
+/**
+ * Container flex
+ */
+
+.Site-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  //custom style
+  padding: 0 !important;
+}
+
+.Site-header,
+.Site-header-full,
+.Site-header-full-md,
+.Site-header-half,
+.Site-footer {
+  flex: none;
+}
+
+.Site-header-full {
+
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+}
+
+.Site-header-full-md {
+
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+}
+
+.Site-header-half {
+  height: 50%;
+}
+
+.Site-main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  
+  //custom style
+  padding: 1em 2em; //15px; 
+
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#main {
+  animation: fadeIn 1s;
+}

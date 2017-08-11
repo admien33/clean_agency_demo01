@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const WebpackShellPlugin = require('webpack-shell-plugin');
 
-
+const sep_path = '/';
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -17,16 +17,22 @@ const WebpackShellPlugin = require('webpack-shell-plugin');
 const config_yml = yaml.safeLoad(fs.readFileSync('./_config.yml', 'utf8'));
 
 const config_source = config_yml.source || './src';
+const config_hosturl = config_yml.url || "";
 const config_baseurl = config_yml.baseurl || "";
+const config_staticman_url = config_yml.staticman.url || "";
 
 const config_path_input_js = config_yml.webpack_assets.js.path_input || './assets/js/';
 const config_path_output_js = config_yml.webpack_assets.js.path_output || './assets/';
-const input_dir_js = config_yml.webpack_assets.js.input_dir || 'app';
+const input_dir_js = config_yml.webpack_assets.js.input_dir || '';
 const output_dir_js = config_yml.webpack_assets.js.output_dir || 'dist';
+const path_components_js = config_yml.webpack_assets.js.path_components || './components/';
 const output_dir_css  = config_yml.webpack_assets.css.assets_ouput || 'css_wp';
 
-let path_tmp = config_path_input_js + input_dir_js + '/';
+let path_tmp = config_path_input_js + input_dir_js;
+if (input_dir_js !== '') {path_tmp+=sep_path;}
 const path_input_js = path.resolve(__dirname,config_source,path_tmp);
+
+const path_ref_components = path.resolve(path_input_js,path_components_js);
 
 path_tmp = config_yml.webpack_assets.css.path_input || './assets/scss/';
 const path_assets_scss = path.resolve(__dirname,config_source,path_tmp);
@@ -58,7 +64,7 @@ fse.ensureDirSync(assets_wp_ouput);
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-const alias_sass_assets = 'alias_sass_assets'; // ~ symbole
+const alias_sass_assets = 'alias_sass_assets';
 const alias_path_template_js = 'alias_path_template_js';
 
 
@@ -84,18 +90,18 @@ assets_conf_list.forEach ( asset => {
 
     // asset js
     let file_js = path.resolve(assets_wp_base,'./'+page.id+'.js'); 
-    let add_asset_css = "require('"+alias_sass_assets+"/"+page.id+".scss');";
+    let add_asset_css = "require('"+alias_sass_assets+sep_path+page.id+".scss');";
     let list_import_js = "";
     if (page.import_js !== "") {
       list_template = page.import_js.split(delim_import_js)
       list_template.forEach ( template => {
-        list_import_js+="import '"+alias_path_template_js+"/"+template+"';";
+        list_import_js+="import '"+alias_path_template_js+sep_path+template+"';";
       });
     }    
     fs.writeFileSync(file_js,JSON.stringify(add_asset_css+list_import_js).replace(/\"/g,''));
 
     //push on entry list
-    let path_entry = output_dir_js+'/'+page.id
+    let path_entry = output_dir_js+sep_path+page.id
     list_entry[path_entry] = file_js;
  });
 })
@@ -105,6 +111,8 @@ fse.copySync(path_ref_img, assets_wp_base)
 // asset fonts, used on css
 fse.copySync(path_ref_font, assets_wp_base)
 
+//asset components, used on js, put on specific folder 
+fse.copySync(path_ref_components, path.resolve(assets_wp_base, path_components_js) )
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -116,7 +124,7 @@ const config = {
   entry: list_entry,
   output: {
     filename: "[name].js",
-    publicPath: config_baseurl + config_path_output_js.substr(1) + output_dir_js + '/',
+    publicPath: config_baseurl + config_path_output_js.substr(1) + output_dir_js + sep_path,
     path: path.resolve(__dirname,config_source,assets_wp_ouput)
     
   },
@@ -188,13 +196,15 @@ const config = {
   plugins: [   
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('production') },
+      HOST_URL: JSON.stringify(config_hosturl),
       BASE_URL: JSON.stringify(config_baseurl),
-      JSON_URL_POSTS : JSON.stringify("/posts.json")
+      STATICMAN_URL: JSON.stringify(config_staticman_url),
+      JSON_URL_POSTS: JSON.stringify("/posts.json")
     }),
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin({
       filename:  (getPath) => {
-        return getPath(output_dir_css+'/[name].css').replace(output_dir_css+'/'+output_dir_js, output_dir_css);
+        return getPath(output_dir_css+'/[name].css').replace(output_dir_css+sep_path+output_dir_js, output_dir_css);
       },
       allChunks: true
     }),

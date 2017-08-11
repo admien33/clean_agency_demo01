@@ -1,0 +1,44 @@
+{
+	"template": "default_navbar_sections_pages",
+	"coll_site": "site-config/navigation-pages/default_navbar_custom",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/navigation/default_navbar_sections_pages.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[		
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/navigation/default_navbar_common_design.scss",
+				"templates/navigation/default_navbar_sections_pages.scss"
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "custom_page",
+			"path": 
+			[
+				"template_default_navbar_sections_pages.js"
+			]				
+		},
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+
+			]				
+		}
+	]
+}

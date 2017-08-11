@@ -15,30 +15,30 @@ layout: compress
   {% if site.angular_app.active %}
     {% assign ang_tag = 'ng-app="' | append: site.angular_app.name_ng_app | append: '"' %}
     {% unless site.angular_app.activate_on == "all_pages" %}
-      {% include coll_ext/html_elt/pages/filter_ang_tag_custom_page.html %}    
+      {% include coll_ext/html_elt/angular_filter_tag_custom_page.html %}    
     {% endunless %}
   {% endif %}  
 
-  <body id="{{site.data.templates.pages.extra.config.id_page_top}}" {{ang_tag}} >
+  <body id="{{site.data.templates._extra.config.id_page_top}}" {{ang_tag}} >
   {% comment %}note : add angularjs directive ng-app, by default, used or not{% endcomment %}
 
-    {% comment %}default or custom background canvas, see /_data/templates/pages/extra/config.json{% endcomment %}
-    {% include coll_ext/html_elt/pages/canvas_style.html %}
+    {% comment %}default or custom background canvas, see /_data/templates/extra/config.json{% endcomment %}
+    {% include coll_ext/html_elt/canvas_style.html %}
     <div canvas="{{canvas_type}}" style="{{canvas_style}}">      
 
       {% comment %}<div class="Site-body container-body">{% endcomment %}
       <div class="Site-body container-fluid">
 
         {% comment %}Navigation template pages{% endcomment %}
-        {% include coll_ext/html_elt/pages/navigation.html %}
+        {% include coll_ext/html_elt/navigation.html %}
 
         {% comment %}Header template page_site {% endcomment %}
         {% comment %}extract configuration siteHeaderClass {% endcomment %}
-        {% include coll_ext/html_elt/page_site/header_design.html
-          default_config=site.data.templates.design.config
+        {% include coll_ext/html_elt/header_design.html
+          default_config=site.data.design_site.config
         %}
         <div class="{{siteHeaderClass}}" role="banner">
-          {% include coll_ext/html_elt/page_site/header.html %}     
+          {% include coll_ext/html_elt/header.html %}     
         </div>
         {% comment %}+++++++++++++++{% endcomment %}     
 
@@ -48,15 +48,15 @@ layout: compress
           <div class="row" >
 
             {% comment %}extract configuration col_main/left/right_section{% endcomment %}
-            {% include coll_ext/html_elt/pages/content_section_design.html
-              default_config=site.data.templates.design.config
+            {% include coll_ext/html_elt/content_section_design.html
+              default_config=site.data.design_site.config
             %}
 
             {% comment %}left content_section{% endcomment %}
             {% if col_left_section != '' %} 
             <div class="{{col_left_section}}">
             {% comment %}Sections left Content template page_site{% endcomment %}
-              {% include coll_ext/html_elt/page_site/sections_left_content.html %}  
+              {% include coll_ext/html_elt/sections_left_content.html %}  
             </div>
             {% endif %}
             {% comment %}end left content_section{% endcomment %}
@@ -67,10 +67,10 @@ layout: compress
             <div class="{{col_main_section}}">
 
               {% comment %}Default Content template page_site{% endcomment %}
-              {% include coll_ext/html_elt/page_site/content.html %}
+              {% include coll_ext/html_elt/content.html %}
              
               {% comment %}Sections Content template page_site{% endcomment %}
-              {% include coll_ext/html_elt/page_site/sections_content.html %}
+              {% include coll_ext/html_elt/sections_content.html %}
               
             </div>
             {% endif %}
@@ -80,7 +80,7 @@ layout: compress
             {% if col_right_section != '' %} 
             <div class="{{col_right_section}}">
               {% comment %}Sections right Content template page_site{% endcomment %}
-              {% include coll_ext/html_elt/page_site/sections_right_content.html %}  
+              {% include coll_ext/html_elt/sections_right_content.html %}  
             </div>
             {% endif %}
             {% comment %}end right content_section{% endcomment %}
@@ -91,18 +91,18 @@ layout: compress
 
         {% comment %}Footer template pages{% endcomment %}
         <footer class="Site-footer">
-          {% include coll_ext/html_elt/pages/footer.html %}  
+          {% include coll_ext/html_elt/footer.html %}  
         </footer>      
         
-      {% include templates/pages/extra/default_go_to_top_primary.html %}
+      {% include templates/_extra/default_go_to_top_primary.html %}
 
       </div>{% comment %}end Site-body{% endcomment %}
     </div>{% comment %}end canvas{% endcomment %}
 
     {% comment %}{% include html_elt/ga.html %}{% endcomment %}
 
-    {% comment %}add script tag from /_data/template/page*{% endcomment %}
-    {% include coll_ext/site-config/add-html/js.html %}
+    {% comment %}add script tag{% endcomment %}
+    {% include coll_ext/site-config/add-html/js_load_webpack.html %}
 
 
     

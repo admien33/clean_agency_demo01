@@ -1,0 +1,52 @@
+{
+	"template": "default_slider",
+	"path_page_config_section": "header-slider",
+	"custom_design_header_container": "half_bg",
+
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/header/default_slider.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"templates/header/default_slider.scss"
+			]			
+		},
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "custom_page",		
+			"path": 
+			[
+				"template_default_slider.js"
+			]			
+		},
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+							
+			]				
+		}
+	]	
+}
+

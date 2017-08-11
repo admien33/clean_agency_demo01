@@ -1,5 +1,6 @@
 ---
 layout : null
+permalink: blog/dinosaurs.html
 title : Dinosaurs
 date-publication: 2014-06-10 12-00-00
 order: 1

@@ -1,0 +1,33 @@
+{
+	"template": "default_go_to_top_primary",
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/_extra/default_go_to_top_primary.html"
+				#// added directly in layouts
+			]
+		}
+	],
+	"import_scss":
+	[
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"templates/_extra/default_go_to_top_primary.scss"
+			]
+		}
+	],
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+				"template_default_go_to_top_primary.js"
+			]			
+		}
+	]
+}

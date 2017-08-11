@@ -1,5 +1,6 @@
 ---
 layout : null
+permalink: portfolio/startup-framework.html
 title: Startup Framework
 subtitle: Website Design
 date-publication: 2014-07-15 12-00-00

@@ -2,34 +2,21 @@
 layout: compress
 ---
 
-{% comment %} import scss template {% endcomment %}
+{% comment %} import scss templates {% endcomment %}
 
 {% capture data_import_scss %}
-	{% include coll_ext/site-config/add-scss/critic_bootstrap_import.html %}
-	{% include coll_ext/site-config/add-scss/critic_template_common_page_site_add_force_custom.html 
-		current_page_site = null
-	%}
+	{% include coll_ext/site-config/add-scss/bootstrap_import_critic_add_custom.html %}
+	{% include coll_ext/site-config/add-scss/template_common_critic_page_site.html %}
 {% endcapture %}
 
-{% comment %} import js template {% endcomment %}
+{% comment %} import js templates {% endcomment %}
 {% assign data_import_js = '' %}
-
-{% assign data_import_js = '' %}
-{% comment %}first, common pages site and detail{% endcomment %}
 {% include coll_ext/site-config/add-html/js_common_import.html 
-  folder_templates=site.data.templates.pages
+  folder_templates=site.data.templates
   type_added_ref='common_pages'
   not_ouput_hmtl=true
 %}
 {% assign data_import_js = list_js_import | remove_first: delim %}
-{% comment %}then common page site part{% endcomment %}  
-{% include coll_ext/site-config/add-html/js_common_import.html 
-  folder_templates=site.data.templates.page_site
-  type_added_ref='common_page_site'
-  not_ouput_hmtl=true
-%}
-{% assign add_list_js_import = list_js_import | remove_first: delim %}
-{% assign data_import_js = data_import_js | append: add_list_js_import %}
 {% if data_import_js != "" %}
 	{% comment %}filter last delim{% endcomment %}
 	{% assign offsetSlice = data_import_js.size | minus: delim.size %}

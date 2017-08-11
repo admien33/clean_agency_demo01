@@ -1,0 +1,36 @@
+
+.intro-header.box_no_bg {
+  background: none
+  // margin-bottom: 50px;
+}
+
+.intro-header.box_no_bg .site-heading,
+.intro-header.box_no_bg .post-heading,
+.intro-header.box_no_bg .page-heading 
+{
+  // margin: 100px 0 50px;
+  color: #404040;
+}
+
+@media only screen and (min-width: 768px) {
+  .intro-header.box_no_bg .site-heading,
+  .intro-header.box_no_bg .post-heading,
+  .intro-header.box_no_bg .page-heading {
+    // margin: 150px 0;
+    margin: 0;
+  }
+}
+
+.intro-header.box_no_bg .post-heading .meta a {
+  color: #404040;
+}
+
+
+.intro-header.box_no_bg .box {
+  // margin: 20px;
+  margin: 50px 20px 20px;
+  padding: 30px 15px;
+  background: #fff;
+  background: rgba(255,255,255,0.7);
+  @include clearfix;
+}

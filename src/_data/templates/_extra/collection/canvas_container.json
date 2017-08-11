@@ -1,0 +1,35 @@
+{
+	"template": "canvas_container",
+	"import_html":
+	[
+		{
+			"path": 
+			[				
+			]
+		}
+	],
+	"import_scss":
+	[
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/_extra/canvas_container.scss",
+				"templates/_extra/container_flex.scss"					
+			],
+			#// !  added directly in /_data/templates/pages/common.json, "common_critic_pages", AFTER base.scss
+			"state": "inactive"
+
+		}
+	],
+	"import_js":
+	[
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+
+			]			
+		}
+	]
+}

@@ -6,11 +6,10 @@ layout: compress
 
 
 {% assign custom_path_items = collection_dataset | append: '/' | append: name_dataset | append: '/' %}
-{% comment %}{% assign custom_path_items = 'detailed-contents/portfolio/' %}{% endcomment %}
 
 {% comment %}{% assign default_page_article_url = name_dataset | append:  site.collections_ext.url_extension_section %}{% endcomment %}
 {% comment %} specific, name_dataset is forced to article/index.html, common page to display detailed article from a lot of dataset{% endcomment %}
-{% assign default_page_article_url = site.data.templates.pages.extra.config.default_page_article_url %}
+{% assign default_page_article_url = site.data.templates._extra.config.default_page_article_url %}
 
 {% include coll_ext/extract/dataset.html 
 	model_ref_force='subsections-dataset-date-publication'
@@ -52,17 +51,23 @@ layout: compress
     {% assign path_folder_article = path_folder_article | replace: name_id_ext, '' %}
    
   	
-  	{% comment %}path_json article{% endcomment %}
-    {% assign path_json = item.path %}
-  	{% assign split_dataset = path_coll_ext_dataset | split: '/' %}
-  	{% assign current_coll = split_dataset[0] %}
-  	{% assign name_id_json = name_id | append: '.json' %}	
-  	{% assign path_json = path_json | replace_first: current_coll,'' %}
-  	{% assign path_json = path_json | replace_first: name_id_ext,name_id_json %}
-  	{% assign path_json = path_json | prepend: site.baseurl %}
+  	{% comment %}path_json article{% endcomment %}  
+    {% if item.permalink != null %}
+      {% assign path_json = item.permalink | prepend: '/' %}
+    {% else %}
+      {% assign path_json = item.path %}
+      {% assign split_dataset = path_coll_ext_dataset | split: '/' %}
+      {% assign current_coll = split_dataset[0] %}    
+      {% assign path_json = path_json | replace_first: current_coll,'' %}
+    {% endif %}
+    {% assign name_id_html = name_id | append: '.html' %}   
+    {% assign name_id_json = name_id | append: '.json' %} 
+    {% assign path_json = path_json | replace_first: name_id_html,name_id_json %}
+    {% assign path_json = path_json | prepend: site.baseurl %}
+    {% assign path_json = path_json | replace: '//','/' %}
   	
   	{% comment %}path_img_src{% endcomment %}
-    {% include templates/utils/extract/path_img_src.html 
+    {% include templates/_utils/extract/path_img_src.html 
       path_image=item.header_img
     %}
 
@@ -83,7 +88,7 @@ layout: compress
   ],
   "config":
   {
-    "hash_prefix": "{{site.data.templates.pages.extra.config.default_hash_prefix_article_url}}",
+    "hash_prefix": "{{site.data.templates._extra.config.default_hash_prefix_article_url}}",
     "url_page_index": "{{site.baseurl | append: '/' | append: default_page_article_url}}"
   }
 }

@@ -1,5 +1,6 @@
 ---
 layout : null
+permalink: portfolio/golden.html
 title: Golden
 subtitle: Graphic Design
 date-publication: 2014-07-24 12-00-00

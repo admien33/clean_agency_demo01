@@ -48,7 +48,9 @@ todo :
 
 
 
-#### AngularJS on detail articles portfolio, and blog page
+#### AngularJS on detail articles portfolio, and blog page; first iteration.
+
+
 
 
 

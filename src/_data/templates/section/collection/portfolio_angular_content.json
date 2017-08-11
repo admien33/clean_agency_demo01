@@ -1,0 +1,59 @@
+{
+	"template": "portfolio_angular_content",
+	
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/section/portfolio_angular_content.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "custom_page_critic",
+			"path": 
+			[
+				"templates/section/common_angular_content.scss"			
+			]			
+		},
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/header/default_intro_header_box_no_bg.scss",
+				"templates/header/default_intro_header.scss"
+			]			
+		},
+		{
+			"added_on": "common_non_critic",
+			"path": 
+			[
+				"bootstrap/pager",
+				"templates/_extra/pager_primary_style.scss"
+			]			
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "custom_page",		
+			"path": 
+			[
+				"template_angular_portfolio.js"
+			]			
+		},
+		{
+			"added_on": "common_pages",
+			"path": 
+			[
+
+			]				
+		}
+	]
+}
+
