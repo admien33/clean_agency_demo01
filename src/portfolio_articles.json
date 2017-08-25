@@ -34,7 +34,7 @@ layout: compress
     {% assign name_id_ext = name_id | append: site.collections_ext.path_extension_item %}
 
     {% comment %}extract path article on collection, and associated url {% endcomment %}
-    {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+    {% include coll_ext/utils/path/extract_path_url_dataset_angular.html
        path_item=item.path
        custom_path=custom_path_items
        path_coll=path_coll_ext_dataset
@@ -49,7 +49,11 @@ layout: compress
     {% assign path_folder_article = path_folder_article | prepend: '/' %} 
     {% comment %}filtering name_id {% endcomment %}
     {% assign path_folder_article = path_folder_article | replace: name_id_ext, '' %}
-   
+    {% comment %}filtering first /{% endcomment %}
+    {% assign path_folder_article_firstchar = path_folder_article | slice: 0 %}
+    {% if path_folder_article_firstchar == '/' %}
+      {% assign path_folder_article = path_folder_article | replace_first: '/', '' %}
+    {% endif %}
   	
   	{% comment %}path_json article{% endcomment %}  
     {% if item.permalink != null %}
@@ -71,14 +75,20 @@ layout: compress
       path_image=item.header_img
     %}
 
+    {% comment %}{% assign category = path_folder_article %}
+    {% assign category = category | replace : name_dataset, '' | replace: '/','' %}{% endcomment %}
+
+    {% comment %}{% assign article_url = site.baseurl | append: '/' | append: default_page_article_url | append: site.data.templates._extra.config.default_hash_prefix_article_url  %}
+    {% assign article_url = article_url | append: '/' | append: path_folder_article | append: name_id %}{% endcomment %}
+
   	{% comment %}<!-- json data -->{% endcomment %}
     {
-    	"name_id" : "{{name_id}}",
-      "path_folder": "{{path_folder_article}}",
+    	"relative_url": "{{path_folder_article}}{{name_id}}",
     	"path_json" : "{{path_json}}",
-    	"title" : "{{item.title | escape }}",
+    	"title" : "{{item.title}}",
+      "subtitle" : "{{item.subtitle}}",
       "raw_date" : "{{item.date-publication}}",   
-      "meta_date" : "{{item.date-publication | date: "%B %-d, %Y"}}",
+      "display_date" : "{{item.date-publication | date: "%B %-d, %Y"}}",
       "path_header_img" : "{{path_img_src}}",
       "description" : "{{item.description | strip_html | strip }}"
     } {% unless forloop.last %},{% endunless %}

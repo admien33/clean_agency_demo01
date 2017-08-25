@@ -14,6 +14,14 @@
 	"import_scss":
 	[
 		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/header/default_intro_header_box_no_bg.scss",
+				"templates/header/default_intro_header.scss"
+			]			
+		},
+		{
 			"added_on": "custom_page_critic",
 			"path": 
 			[

@@ -6,7 +6,6 @@
   ],
 
   "default_template_page_site": "default_social_buttons",
-  "default_template_page_detail": "default_social_buttons",
   
   "path_coll": "site-config/footer/"
 }

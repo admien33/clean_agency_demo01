@@ -1,0 +1,36 @@
+{
+	"template": "default_navbar_fixed_nojs_detail",
+	
+	"import_html":
+	[
+		{
+			"path": 
+			[
+				"templates/navigation/default_navbar_fixed_nojs_detail.html"
+			]
+		}
+	],
+
+	"import_scss":
+	[
+		{
+			"added_on": "common_critic_pages",
+			"path": 
+			[
+				"templates/navigation/default_navbar_common_design.scss",
+				"templates/navigation/default_navbar_fixed_nojs.scss"
+			]					
+		}
+	],
+
+	"import_js":
+	[
+		{
+			"added_on": "custom_page",
+			"path": 
+			[
+				"template_default_navbar_fixed.js"
+			]
+		}
+	]	
+}

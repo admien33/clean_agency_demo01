@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: portfolio/treehouse.html
 title: Treehouse
 subtitle: Website Design

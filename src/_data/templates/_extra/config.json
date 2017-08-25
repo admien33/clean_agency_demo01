@@ -9,13 +9,16 @@
 	"id_page_top": "page-top",
 
 
-  "default_page_article_url": "article/index.html",
+  
   "default_detail_content_folder": "detailed-contents/",
+
+  #// angular
+  "default_page_article_url": "article/index.html",  
   "default_hash_prefix_article_url": "#!",
+  "default_state_articles_url": "articles",
 
-
+  #// canvas page config
 	"default_canvas_page_site": "container",
-  "default_canvas_page_detail": "container_lin_grad_45deg",
   
   "extra_param_page_templ":
   [

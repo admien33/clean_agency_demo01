@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: portfolio/golden.html
 title: Golden
 subtitle: Graphic Design

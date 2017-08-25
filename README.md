@@ -5,11 +5,6 @@
 Design from Clean Blog & Agency Themes from Start Bootstrap, editable and extendable, based on Jekyll & Git.
 
 
-Custom editor on progress : update github server on localhost; in V1, via VM VirtualBox
-
-Custom libs is required: src/_includes/coll_ext, src/_data/coll_ext
-
-
 
 ### Webpack_assets put on Jekyll src
 
@@ -49,6 +44,10 @@ todo :
 
 
 #### AngularJS on detail articles portfolio, and blog page; first iteration.
+
+- UI router
+- SessionStorage
+
 
 
 

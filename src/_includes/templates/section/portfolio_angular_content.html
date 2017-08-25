@@ -1,155 +1,44 @@
-{% comment %}<!--
-  param in :
-  common_param:
-    id_section
-    path_section
-    html_section_class
-    html_section_style
-    list_param_template_section
-    custom_path_items
-  param out:
-    add html
-
- -->{% endcomment %}
+<article>
+  
+  <ui-view></ui-view>
+  
+</article>
 
 
-{% include coll_ext/extract/site_subsection.html 
-  path_section=path_section
-  custom_path_items= custom_path_items
-%}
+<script type="text/ng-template" id="templateDetailPortfolio.html">
 
-{% comment %}extract item_previous / item_next {% endcomment %}
-{% include coll_ext/extract/item/from_all.html index=0 %}
-{% include coll_ext/extract/item/next_previous_from_all.html 
-  path_item = item.path
-%}
-
-{% comment %}extract last article on portfolio{% endcomment %}
-{% include coll_ext/extract/item/from_all.html index=0 %}
-
-{% comment %}AngularJs, ng-app="JekyllApp" add on layout{% endcomment %}
-<article ng-controller="ContentCtrl" class="invArticle" >
-
-  <header class="intro-header box_no_bg">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="box">
-
-        {% if box_no_bg_hide_img == 'true' %}
-          {% comment %}<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">{% endcomment %}
-          <div class="col-lg-10 col-lg-offset-1">
-        {% else %}
-
-          <div class="col-sm-12 text-center">
-            {% include templates/_utils/extract/path_img_src.html 
-              path_image=item.header_img
-            %}
-            {% comment %}  img-border-left {% endcomment %}
-            <img class="img_header img-responsive center-block" src="{{path_img_src}}" alt="">
-          </div>
-
-          <div class="col-sm-12">
-        {% endif %}
-
-            <div class="post-heading">
-              <h1 class="heading">{{ item.title }}</h1>
-              {% if item.description %}
-                <h2 class="subheading">{{ item.description }}</h2>
-              {% endif %}
-              <span class="meta">Posted on <span class='date'> {{ item.date-publication | date: "%B %-d, %Y" }}</span></span>
-            </div>
-            
-          </div>
-
+  <header class="articleHeader intro-header box_no_bg">
+    <div class="row">
+      <div class="box">     
+        <div class="col-md-6">         
+          <img class="img_header img-responsive img-border-left" src="{% raw %}{{$ctrl.article.path_header_img}}{% endraw %}" alt="">
+        </div>
+        <div class="col-md-6">      
+          <div class="post-heading">
+            <h1 class="heading"> <span ng-bind="$ctrl.article.title"></span> </h1>
+            <h2 class="subheading"> <span ng-bind="$ctrl.article.subtitle"></span></h2>            
+            <span class="meta">Posted on <span class='date'><span ng-bind="$ctrl.article.display_date"></span> </span></span>
+          </div>          
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Detail Content -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="articleContent col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        {{ item.content }}       
-      </div>
-       
-      <div class=" col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-        <hr>   
-        <search-portfolio></search-portfolio>
-        
-        <hr>   
-       
-        <ul class="pager">
-
-          {% comment %}previous item{% endcomment %}
-          {% assign path_ref =item.path %}
-          {% assign add_class = '' %}
-          {% if item_previous != null %} 
-            {% assign path_ref =item_previous.path %} 
-          {% else %}           
-            {% assign add_class = 'invPager' %}
-          {% endif %}
-          {% include coll_ext/utils/path/extract_path_url_detailed_article.html
-             path_item=path_ref
-             custom_path=custom_path_items
-             url_page_article=null
-          %} 
-          <li class="previous {{add_class}}">
-            <a href="{{url_detailed_article}}"  data-toggle="tooltip" data-selector="true" data-placement="top" title="{{item_previous.title}}">&larr; Previous Article</a>
-          </li>
-
-          {% comment %}next item{% endcomment %}
-          {% assign path_ref =item.path %}
-          {% assign add_class = '' %}
-          {% if item_next != null %} 
-            {% assign path_ref =item_next.path %} 
-          {% else %}           
-            {% assign add_class = 'invPager' %}
-          {% endif %}
-          {% include coll_ext/utils/path/extract_path_url_detailed_article.html
-             path_item=path_ref
-             custom_path=custom_path_items
-             url_page_article=null
-          %}
-
-          <li class="next {{add_class}}">
-            <a href="{{url_detailed_article}}" data-toggle="tooltip" data-selector="true" data-placement="top" title="{{item_next.title}}">Next Article &rarr;</a>
-          </li>
-
-        </ul>
-
-      </div>
+  <div class="articleDetail row">
+    <div class="articleContent col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+      <span ng-bind-html="$ctrl.content"></span>
     </div>
   </div>
-</article>
 
-
-
-<script type="text/ng-template" id="templateSearchPortfolio.html">
-
-  <div class="row">
-    <div class="col-lg-4 col-md-6">
-      <p>Search:<input ng-model="$ctrl.query"></p>
-      <p>Sort by:
-      <select ng-model="$ctrl.orderProp">            
-        <option value="-raw_date">Newest</option>
-        <option value="title">Alphabetical</option>
-      </select>
-      </p>
-    </div>
-
-    <div class="col-lg-8 col-md-6">
-      <ul class="articles">
-        <li ng-repeat="article in $ctrl.articles | filter:$ctrl.query | orderBy:$ctrl.orderProp">
-          <h3 ng-bind="article.title"></h3>
-          <p>Posted on <span ng-bind="article.meta_date"></span></p>
-          <p ng-bind="article.description"></p>
-        </li>
-      </ul>
-    </div>
-
+  <div class=" col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">      
+    <ul class="pager">
+      <li class="previous" ng-if="$ctrl.articlePrevious != undefined">
+        <a ui-sref="detail({_articleUrl: $ctrl.articlePrevious.relative_url })" title="{% raw %}{{$ctrl.articlePrevious.title}}{% endraw %}">&larr; Previous Article</a>
+      </li>
+      <li class="next" ng-if="$ctrl.articleNext != undefined">         
+        <a ui-sref="detail({_articleUrl: $ctrl.articleNext.relative_url })" title="{% raw %}{{$ctrl.articleNext.title}}{% endraw %}">Next Article &rarr;</a>
+      </li>
+    </ul>
   </div>
-
+  
 </script>
-

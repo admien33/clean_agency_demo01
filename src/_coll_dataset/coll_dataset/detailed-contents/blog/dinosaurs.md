@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: blog/dinosaurs.html
 title : Dinosaurs
 date-publication: 2014-06-10 12-00-00

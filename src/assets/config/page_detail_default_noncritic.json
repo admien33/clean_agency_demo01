@@ -1,0 +1,85 @@
+---
+layout: compress
+---
+
+{% assign page_ref = 'page_detail_default' %}
+
+{% comment %}specific css assets, js assets from common_critic.json{% endcomment %}
+
+{% assign page_id = page_ref | append: '_noncritic' %}
+
+{% include coll_ext/extract/site.html %}
+{% include coll_ext/extract/subfn_site/subsections/raw_items_subsection.html 
+path_subsection = "pages-site/"
+%}
+{% assign array_pages_site = array_subsections %}
+{% assign size_pages_site = array_subsections_size %}
+{% assign is_page_site_gl = true %}
+
+{% assign list_custom_import_scss = '' %}
+{% assign list_custom_import_js = '' %}
+
+{% for index_cps in (0..size_pages_site)  %}
+
+	{% assign index_page_cps = array_pages_site[index_cps] | plus: 0 %}
+	{% assign item_page_cps = raw_items_site[index_page_cps] %}
+
+	{% comment %}name_id{% endcomment %}
+	{% include coll_ext/utils/path/extract_name_id_from_path.html 
+	  path=item_page_cps.path
+	%}
+
+	{% if name_id == page_ref %}
+
+		{% assign name_id_cps = name_id %}
+		{% comment %}page_url{% endcomment %}
+		{% assign page_url_cps = '/' %}
+		{% unless name_id_cps == site.collections_ext.root_page %}
+			{% assign ext_page = site.collections_ext.url_extension_section %}
+			{% if name_id_cps == '404' %}
+				{% assign ext_page = site.collections_ext.url_extension_item %}
+			{% endif %}
+			{% assign page_url_cps = page_url_cps | append: name_id_cps | append: ext_page %}
+		{% endunless %}
+
+		{% include coll_ext/extract/site_page.html 
+		  url_page=page_url_cps
+		%}
+
+		{% comment %}import scss{% endcomment %}
+		{% capture list_custom_import_scss %}			
+			{% include coll_ext/site-config/add-scss/template_custom_critic_page_site.html %}
+		{% endcapture %}
+		{% capture data_import_scss %}
+			{% include coll_ext/site-config/add-scss/bootstrap_import_noncritic_all.html %}
+			{% include coll_ext/site-config/add-scss/template_common_critic_page_site.html %}
+			{% include coll_ext/site-config/add-scss/template_common_noncritic_page_site.html %}
+		{% endcapture %}
+
+		{% assign data_import_scss = data_import_scss | append: list_custom_import_scss %}
+
+		{% break %}		
+
+	{% endif %}
+
+{% endfor %}
+
+
+{% comment %}<!-- json data -->{% endcomment %}				
+{
+  "pages":
+  [		
+		{
+			"id":"{{page_id}}",			
+			"import_scss": "{{data_import_scss}}",
+			"import_js": ""
+		}
+	],
+  "config":
+  {
+  	"var_custom_style": "",
+  	"delim_import_js": ""  
+  }
+}
+
+

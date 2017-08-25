@@ -71,6 +71,8 @@ const alias_path_template_js = 'alias_path_template_js';
 const list_entry = {};
 
 //on entry, push default vendor; fixed, could be push on config file
+// list_entry[output_dir_js+'/vendor'] = ['jquery','bootstrap','angular','angular-ui-router'];
+
 list_entry[output_dir_js+'/vendor'] = ['jquery','bootstrap','angular'];
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -233,7 +235,9 @@ const config = {
       // list import vendor js
       'jquery': path.resolve(path_input_js, './vendor/jquery.2.2.0.min.js'),
       'bootstrap': path.resolve(path_input_js,  './vendor/bootstrap.3.3.7.js'),
-      'angular': path.resolve(path_input_js,  './vendor/angular.1.6.4.min.js'),
+      'angular': path.resolve(path_input_js,  './vendor/angular.1.6.4.js'),
+      'angular-sanitize': path.resolve(path_input_js,  './vendor/angular-sanitize.1.6.4.js'),
+      'angular-ui-router': path.resolve(path_input_js,  './vendor/angular-ui-router_bug_fix.1.0.6.js'),
       // list import plugin js
       'picturefill': path.resolve(path_input_js,  './vendor/picturefill.min.js'),
       'jqBootstrapValidation': path.resolve(path_input_js,  './plugin/jquery.bootstrap-validation.js'),

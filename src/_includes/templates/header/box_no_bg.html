@@ -1,0 +1,65 @@
+{%comment%}<!--
+param in :
+common_param:
+  meta_current_page
+param out :
+  html
+ -->{%endcomment%}
+
+
+{% comment %}specific, extract custom param{% endcomment %}
+{% assign box_no_bg_hide_img = 'false' %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='box_no_bg_hide_img'
+  list=meta_current_page.list_param_page_template      
+%}
+{% if value_from_key != null %}
+  {% assign box_no_bg_hide_img = value_from_key %}
+{% endif %}
+
+
+{% comment %}
+{% include coll_ext/extract/site_subsection.html 
+  path_section='pages-site/portfolio/page-sections/portfolio/'
+  custom_path_items= 'detailed-contents/portfolio'
+%}
+{% assign index_item = | plus: 0 %}
+{% include coll_ext/extract/item/from_all.html index=index_item %}
+{% endcomment %}
+
+<header class="intro-header box_no_bg">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="box">
+
+      {% if box_no_bg_hide_img == 'true' %}
+
+        {% comment %}<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">{% endcomment %}
+        <div class="col-lg-10 col-lg-offset-1">
+      {% else %}
+
+        <div class="col-md-6">
+          {% comment %}extract path_img_src{% endcomment %}
+          {% include templates/_utils/extract/path_img_src.html 
+            path_image=meta_current_page.header_img
+          %}
+          <img class="img-responsive img-border-left" src="{{path_img_src}}" alt="">
+        </div>
+
+        <div class="col-md-6">
+      {% endif %}
+
+          <div class="post-heading">
+            <h1>{{ meta_current_page.title }}</h1>
+            {% if meta_current_page.subtitle %}
+              <h2 class="subheading">{{ meta_current_page.subtitle }}</h2>
+            {% endif %}
+            <span class="meta">Posted {% if meta_current_page.author %}by {{ meta_current_page.author }}{% endif %} on {{ meta_current_page.date-publication | date: "%B %-d, %Y" }}</span>
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>

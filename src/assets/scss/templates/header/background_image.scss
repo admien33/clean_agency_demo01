@@ -15,6 +15,14 @@
   padding: 100px 0 50px;
   color: white;
 }
+
+.intro-header.darken .site-heading,
+.intro-header.darken .post-heading,
+.intro-header.darken .page-heading {
+  color: #111111;
+}
+
+
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
   .intro-header .post-heading,

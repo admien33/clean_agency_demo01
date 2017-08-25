@@ -27,7 +27,6 @@
   custom_path_items= custom_path_items
 %}
 
-{% comment %}+++++++++++++++++++++++++++++++++++++++++++++++++++++++{% endcomment %}
 {% comment %}specific, extract custom param {% endcomment %}
 {% assign nb_last_items_display = nb_last_items_display_default | minus: 1 %}
 {% include coll_ext/utils/list/extract_value_from_key.html 
@@ -37,7 +36,7 @@
 {% if value_from_key != null %}
   {% assign nb_last_items_display = value_from_key | minus: 1 %}
 {% endif %}
-{% comment %}+++++++++++++++++++++++++++++++++++++++++++++++++++++++{% endcomment %}
+{% comment %}{% endcomment %}
 
 
 <section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
@@ -69,7 +68,7 @@
       {% for index_item in (0..nb_last_items_display) %}
         {% include coll_ext/extract/item/from_all.html index=index_item %}       
 
-        {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+        {% include coll_ext/utils/path/extract_path_url_dataset_angular.html
            path_item=item.path
            custom_path=custom_path_items
            url_page_article=url_page_article
@@ -82,6 +81,9 @@
                 <i class="fa fa-plus fa-3x"></i>
               </div>
             </div>
+          <noscript>
+            <a href="{{item.permalink | prepend: '/' | prepend: site.baseurl}}" class="portfolio-link" data-toggle="">
+          </noscript>
             {% if item.miniature_is_reduced_img == true %}
             	{% picture portfolio-thumbnail {{item.image}} alt="{{item.title}}" %}
             {% else %}

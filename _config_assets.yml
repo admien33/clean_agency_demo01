@@ -13,6 +13,7 @@ custom_assets_config:
     - "./common_critic.json"
     - "./common_noncritic.json"
     - "./custom_pages_site.json"
+    # - "./page_detail_default_noncritic.json"
   webpack_base_path: "./webpack/"
   webpack_output_path: "./webpack/output/assets/"
 

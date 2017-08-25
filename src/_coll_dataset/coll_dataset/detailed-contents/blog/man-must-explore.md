@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: blog/man-must-explore.html
 title : Man must explore
 date-publication : 2014-09-24 12-00-00

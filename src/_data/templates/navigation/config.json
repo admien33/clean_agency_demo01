@@ -5,11 +5,11 @@
     "default_navbar_fixed",
     "default_navbar_custom_dd_sections",
     "default_navbar_sections_dd_pages",
-    "default_navbar_fixed_nojs"
+    "default_navbar_fixed_nojs",
+     "default_navbar_fixed_nojs_detail"
   ],
 
   "default_template_page_site": "default_navbar_custom",
-  "default_template_page_detail": "default_navbar_custom",
   
   "path_coll": "site-config/navigation-pages/"
 }

@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: portfolio/round-icons.html
 title: Round Icons
 subtitle: Graphic Design

@@ -6,6 +6,15 @@ param out :
   html
  -->{%endcomment%}
 
+{% comment %}extract custom param{% endcomment %}
+{% assign class_style_bg_header = '' %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='type_bg_header'
+  list=meta_current_page.list_param_page_template      
+%}
+{% if value_from_key != null %}
+  {% assign class_style_bg_header = value_from_key %}
+{% endif %}
 
 
 {% comment %}extract path_img_src{% endcomment %}
@@ -13,7 +22,7 @@ param out :
   path_image=meta_current_page.header_img
 %}
 
-<header class="intro-header" style="background-image: url({{path_img_src}})">
+<header class="intro-header {{class_style_bg_header}}" style="background-image: url({{path_img_src}})">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">

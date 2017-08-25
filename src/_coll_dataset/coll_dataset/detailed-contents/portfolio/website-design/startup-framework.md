@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: portfolio/startup-framework.html
 title: Startup Framework
 subtitle: Website Design

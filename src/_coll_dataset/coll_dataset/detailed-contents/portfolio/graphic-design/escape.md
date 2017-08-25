@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: portfolio/escape.html
 title: Escape
 subtitle: Graphic Design
@@ -17,7 +17,7 @@ client: Start Bootstrap
 category: Web Development
 description: Lorem ipsum datum dolor sit amet, usu cu alterum nominavi lobortis. At duo novum diceret. Tantas apeirian vix et, usu sanctus postulant inciderint ut, populo diceret necessitatibus in vim. Cu eum dicam feugiat noluisse.
 header_img: detailed-contents/portfolio/escape.png
-list_param_page_template: "type_bg_header:darken"
+list_param_page_template: ""
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?

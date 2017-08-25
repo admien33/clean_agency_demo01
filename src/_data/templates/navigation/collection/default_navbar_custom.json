@@ -1,6 +1,5 @@
 {
 	"template": "default_navbar_custom",
-	"coll_site": "site-config/navigation-pages/default_navbar_custom",
 
 	"import_html":
 	[

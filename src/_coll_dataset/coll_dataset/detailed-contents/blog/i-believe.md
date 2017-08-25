@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: blog/i-believe.html
 title : I believe
 date-publication : 2014-09-18 12-00-00

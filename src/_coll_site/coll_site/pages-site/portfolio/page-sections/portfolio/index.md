@@ -6,6 +6,6 @@ description: Lorem ipsum dolor sit amet consectetur.
 sort_items: date-publication
 model: default-subsection
 type_child_editor : NoContent
-template: portfolio_design_grid_detail
+template: portfolio_grid_page_site
 list_param_template: "folder_items:detailed-contents/portfolio"
 ---

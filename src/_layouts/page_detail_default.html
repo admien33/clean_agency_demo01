@@ -1,0 +1,72 @@
+---
+layout: compress
+---
+
+{% comment %}case noscript page detail{% endcomment %}
+
+{% comment %}force common_param{% endcomment %}
+{% assign name_id_page = 'page_detail_default' %}
+{% assign is_page_site_gl = false %}
+{% assign meta_current_page = page %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  {% comment %}Head pages{% endcomment %}
+  {% include html_elt/head.html %}  
+
+  <body id="{{site.data.templates._extra.config.id_page_top}}" >
+   
+    <div canvas="container" style="">      
+
+      <div class="Site-body container-fluid">
+
+        {% comment %}Navigation template pages{% endcomment %}
+        {% comment %}add html template directly{% endcomment %}  
+        {% include templates/navigation/default_navbar_fixed_nojs_detail.html %}
+
+        {% comment %}Header template page_site {% endcomment %}      
+        <div class="Site-header" role="banner">
+          {% comment %}add html template directly{% endcomment %}         
+          {% include templates/header/box_no_bg.html %}
+        </div>
+        {% comment %}+++++++++++++++{% endcomment %}     
+
+        {% comment %}main CONTENT SECTION{% endcomment %}       
+        <main class="Site-main" id="main" role="main">        
+          <div class="row" >            
+
+            {% comment %}main content_section{% endcomment %}
+              <div class="col-lg-12">
+
+                {% include templates/content/default_content.html %}
+               
+              </div>
+            {% comment %}end main content_section{% endcomment %}
+
+          </div>
+        </main>
+        {% comment %}end main CONTENT SECTION{% endcomment %}
+        {% comment %}+++++++++++++++++++{% endcomment %}
+
+        {% comment %}Footer template pages{% endcomment %}
+        {% comment %}<footer class="Site-footer">
+          {% include coll_ext/html_elt/footer.html %}  
+        </footer>   {% endcomment %}   
+        
+        {% include templates/_extra/default_go_to_top_primary.html %}
+
+      </div>{% comment %}end Site-body{% endcomment %}
+    </div>{% comment %}end canvas{% endcomment %}
+
+    {% comment %}{% include html_elt/ga.html %}{% endcomment %}
+
+    {% comment %}add script tag{% endcomment %}
+    {% include coll_ext/site-config/add-html/js_load_webpack.html %}
+
+
+    
+  </body>
+</html>
+   
+

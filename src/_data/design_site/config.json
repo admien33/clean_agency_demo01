@@ -12,16 +12,7 @@
 		"header_container": "default"
 	},
 
-
-	#// add specific asset on current page with "custom css templates" force on common
-	#// new asset must be add on _assets/stylesheets/load_assets/
-	#// cas "home", file critic-home-site.css.scss.liquid, with current_name_id_page='home'
-	#// take time to add newasset files ! ~ 1.5s /asset added
-	"list_force_custom_scss_on_page":
-	[
-		#// "home","blog","article"
-	],
-
+		
 
 
 	"list_class_noscript_none2block":

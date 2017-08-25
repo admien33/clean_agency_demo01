@@ -1,5 +1,5 @@
 ---
-layout: page_default
+layout: page_site_default
 permalink: /blog/index.html
 ---
 

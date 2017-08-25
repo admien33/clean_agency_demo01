@@ -21,7 +21,7 @@
 	{% assign page_description = include.meta_page.description %}
 	{% assign page_content = include.meta_page.content %}
 {% else %}
-	{% assign page_subtitle = page.title %}
+	{% assign page_subtitle = page.title | append: '-' | append: page.subtitle %}
 	{% assign page_description = page.description %}
 	{% assign page_content = page.content %}
 {% endif %}

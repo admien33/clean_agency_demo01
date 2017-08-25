@@ -15,7 +15,7 @@
 {% assign row_col_presentation = "col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" %}
 {% assign url_page_article='blog/index.html' %}
 {% assign nb_last_items_display = 5 | minus: 1 %}
-{% assign max_older_items = 20 | minus: 1 %}{% comment %} then link archive page, todo{% endcomment %}
+{% assign max_older_items = 50 | minus: 1 %}{% comment %} then link archive page, todo{% endcomment %}
 
 
 
@@ -33,16 +33,34 @@
 {% if value_from_key != null %}
   {% assign nb_last_items_display = value_from_key | minus: 1 %}
 {% endif %}
+{% comment %}{% endcomment %}
+
+{% comment %}specific, extract custom param "no_script_only" from meta list if defined{% endcomment %}
+{% assign no_script_only = 'false' %}
+{% include coll_ext/utils/list/extract_value_from_key.html 
+  key='no_script_only'
+  list=list_param_template_section      
+%}
+{% if value_from_key != null %}
+  {% assign no_script_only = value_from_key %}
+{% endif %}
+{% comment %}{% endcomment %}
 
 
 
+{% comment %} Template {% endcomment %}
 
-<section id="{{id_section}}" class="{{html_section_class}}" style="{{html_section_style}}">
+{% assign class_no_script_only = '' %}
+{% if no_script_only == 'true' %}
+  {% assign class_no_script_only = 'block_nojs' %}
+{% endif %}
+
+<section id="{{id_section}}" class="{{html_section_class}} {{class_no_script_only}}" style="{{html_section_style}}">
 
   {% comment %}row presentation{% endcomment %}
   <div class="row text-center">
     <div class="{{row_col_presentation}}">
-      <h2 class="section-heading">{{meta_section.subtitle}} </h2>
+      <h2 class="section-heading">{{meta_section.subtitle}}</h2>
       <h3 class="section-subheading text-muted">{{meta_section.description}}</h3>
       {% if meta_section.subtitle != null or meta_section.description != null %}
         <hr>
@@ -62,14 +80,18 @@
       {% for index_item in (0..nb_last_items_display) %}
         {% include coll_ext/extract/item/from_all.html index=index_item %}       
 
-        {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+        {% comment %}extract angular's url_detailed_article, url_default_articles  {% endcomment %}
+        {% include coll_ext/utils/path/extract_path_url_dataset_angular.html
            path_item=item.path
            custom_path=custom_path_items
            url_page_article=url_page_article
         %}
 
         <div class="post-preview">
-          <a href="{{ url_detailed_article }}">
+          <a href="{{ url_detailed_article }}" class="">
+          <noscript>
+            <a href="{{item.permalink | prepend: '/' | prepend: site.baseurl}}" class="" >
+          </noscript>
             <h2 class="post-title">
               {{ item.subtitle }}
             </h2>
@@ -88,14 +110,26 @@
         {% endunless %}
       {% endfor %}{% comment %}end loop items{% endcomment %}
 
+
+      <ul class="pager">          
+        <li class="next">
+          <a href="{{ url_default_articles }}" class="btn btn-default none_nojs">
+            <span>All posts</span>
+          </a>
+          <a href="{{url_page_article | prepend: '/' | prepend: site.baseurl}}" class="btn btn-default initial_nojs">
+            <span>All posts</span>
+          </a>          
+        </li>
+      </ul>
+
       {% comment %}extra loop older items{% endcomment %}
-      {% if size_all_items > nb_last_items_display %}
+      {% if size_all_items > nb_last_items_display and desactive == true %}
       {% comment %}size_all_items, specific with coll_ext/extract/item/from_all.html{% endcomment %}
         <ul class="pager">          
           <li class="next">
             <a href="#olderArtBLog" class="btn btn-default" data-toggle="collapse">Older Articles</a>
           </li>
-        </ul>
+        </ul>        
         <div id="olderArtBLog" class="collapse">
           {% comment %}This div is hidden by default{% endcomment %}
           {% if size_all_items < max_older_items %}
@@ -106,7 +140,7 @@
           {% for index_item in (nb_last_items_display..max_older_items) %}
             {% include coll_ext/extract/item/from_all.html index=index_item %}       
 
-            {% include coll_ext/utils/path/extract_path_url_detailed_article.html
+            {% include coll_ext/utils/path/extract_path_url_dataset_angular.html
                path_item=item.path
                custom_path=custom_path_items
                url_page_article=url_page_article

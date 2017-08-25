@@ -1,5 +1,5 @@
 ---
-layout : null
+layout : page_detail_default
 permalink: portfolio/dreams.html
 title: Dreams
 date-publication: 2014-07-18 12-00-00

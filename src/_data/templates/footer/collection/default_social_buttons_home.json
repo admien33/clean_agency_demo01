@@ -1,6 +1,5 @@
 {
 	"template": "default_social_buttons_home",
-	"coll_site": "site-config/footer/default_social_buttons_home",
 
 	"import_html":
 	[

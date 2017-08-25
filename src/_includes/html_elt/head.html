@@ -1,7 +1,8 @@
 {% comment %}<!--
   param in :
   common-param :
-    meta_page
+    meta_current_page
+    name_id_page
     page
   param out:
     return html, part head
@@ -16,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">  
  
   {% include html_elt/head_meta_seo.html 
-    meta_page=meta_page
+    meta_page=meta_current_page
   %}  
 
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
@@ -61,9 +62,8 @@
 
   {% comment %} 
   - add google font family link site-config/google-font/
+  - webfont script and no script link stylesheet
   {% endcomment %}
-  {% comment %}{% include coll_ext/site-config/add-html/head_link_google_font.html %}{% endcomment %}
-  {% comment %}webfont script and no script link stylesheet{% endcomment %}
   {% include coll_ext/site-config/add-html/head_link_google_font_webfontjs.html %}
   
   {% comment %}{% feed_meta %}{% endcomment %}
