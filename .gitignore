@@ -6,6 +6,7 @@ src/.asset-cache
 src/.jekyll-metadata
 src/assets/dist
 src/_assets/css_wp
+src/_data/webpacked_assets
 webpack
 src/_data/coll_ext
 src/_includes/coll_ext

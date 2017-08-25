@@ -14,6 +14,7 @@ jekyllApp.config(['$compileProvider', '$locationProvider', '$stateProvider', '$u
 	//$location service, keep history browser
 	// add <base href="{{page.url}}">, not used on hashbang mode (html5Mode:false) 
 	//see > 1.6.0 : default hashbang '!', https://docs.angularjs.org/guide/migration#-location-
+  // default hashbang mode used, V1;  jekyll need permalink /blog/index.html; but in html5 mode, index.html is filtering, todo eval with rewrite url 
 	$locationProvider.html5Mode(false).hashPrefix('!');
 
 	$provide.service('PortfolioService', PortfolioService); 
