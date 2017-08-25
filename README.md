@@ -4,7 +4,7 @@
 
 Design from Clean Blog & Agency Themes from Start Bootstrap, editable and extendable, based on Jekyll & Git.
 
-Optim pagespeed insight > 90% both mobile & desktop, 2017-08-26
+Optim home-page pagespeed insight > 90% both mobile & desktop, 2017-08-26
 
 Custom templates could be defined on each page. Example pages on demo_01 : custom navigation headers, custom footer and canvas on home page.
 
