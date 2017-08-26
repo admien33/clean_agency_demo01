@@ -22,12 +22,12 @@ layout: compress
       <div class="Site-body container-fluid">
 
         {% comment %}Navigation template pages{% endcomment %}
-        {% comment %}add html template directly{% endcomment %}  
+        {% comment %}force html template : {% endcomment %}  
         {% include templates/navigation/default_navbar_fixed_nojs_detail.html %}
 
         {% comment %}Header template page_site {% endcomment %}      
         <div class="Site-header" role="banner">
-          {% comment %}add html template directly{% endcomment %}         
+          {% comment %}force html template : {% endcomment %}         
           {% include templates/header/box_no_bg.html %}
         </div>
         {% comment %}+++++++++++++++{% endcomment %}     
@@ -50,6 +50,7 @@ layout: compress
         {% comment %}+++++++++++++++++++{% endcomment %}
 
         {% comment %}Footer template pages{% endcomment %}
+        {% comment %}no footer V1, or added here with content{% endcomment %}
         {% comment %}<footer class="Site-footer">
           {% include coll_ext/html_elt/footer.html %}  
         </footer>   {% endcomment %}   

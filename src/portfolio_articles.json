@@ -3,22 +3,13 @@ layout: compress
 ---
 {% assign collection_dataset = 'detailed-contents' %}
 {% assign name_dataset = 'portfolio' %}
+{% assign force_to_common_article_url = true %}
 
 
-{% assign custom_path_items = collection_dataset | append: '/' | append: name_dataset | append: '/' %}
-
-{% comment %}{% assign default_page_article_url = name_dataset | append:  site.collections_ext.url_extension_section %}{% endcomment %}
-{% comment %} specific, name_dataset is forced to article/index.html, common page to display detailed article from a lot of dataset{% endcomment %}
-{% assign default_page_article_url = site.data.templates._extra.config.default_page_article_url %}
-
-{% include coll_ext/extract/dataset.html 
-	model_ref_force='subsections-dataset-date-publication'
-%}
-
-{% include coll_ext/extract/subfn_dataset/sub_items/raw_direct_all_items.html
-  path_subsection=custom_path_items
-%}
-
+{% include coll_ext/json_dataset/init_angjs_articles.html %}
+{% comment %}
+  output, items on dataset : size_all_items, include coll_ext/extract/item/from_all.html
+{% endcomment %}
 {
   "list":
   [
@@ -27,68 +18,30 @@ layout: compress
 
   	{% include coll_ext/extract/item/from_all.html index=index_item %}
 
-    {% comment %}name_id article{% endcomment %}
-    {% include coll_ext/utils/path/extract_name_id_from_path.html 
+    {% comment %}extract relative_url_angjs_article, include first init_angjs_articles.html {% endcomment %}
+    {% include coll_ext/json_dataset/relative_url_angjs_article.html 
       path=item.path
     %}
-    {% assign name_id_ext = name_id | append: site.collections_ext.path_extension_item %}
-
-    {% comment %}extract path article on collection, and associated url {% endcomment %}
-    {% include coll_ext/utils/path/extract_path_url_dataset_angular.html
-       path_item=item.path
-       custom_path=custom_path_items
-       path_coll=path_coll_ext_dataset
-       url_page_article=default_page_article_url
-    %} 
-    {% comment %}path_folder_article{% endcomment %}
-    {% assign path_folder_article = path_detailed_article %}
-    {% assign path_folder_article = path_folder_article | append: site.collections_ext.path_extension_item %}
-    {% comment %}filtering first part path, form: {{name_dataset}}/xxx/xxx {% endcomment %}
-    {% comment %}{% assign path_folder_article = path_folder_article | remove_first: name_dataset %}{% endcomment %}
-    {% comment %} specific, with generic page article,  no filtering name_dataset, prepend '/'{% endcomment %}    
-    {% assign path_folder_article = path_folder_article | prepend: '/' %} 
-    {% comment %}filtering name_id {% endcomment %}
-    {% assign path_folder_article = path_folder_article | replace: name_id_ext, '' %}
-    {% comment %}filtering first /{% endcomment %}
-    {% assign path_folder_article_firstchar = path_folder_article | slice: 0 %}
-    {% if path_folder_article_firstchar == '/' %}
-      {% assign path_folder_article = path_folder_article | replace_first: '/', '' %}
-    {% endif %}
-  	
-  	{% comment %}path_json article{% endcomment %}  
-    {% if item.permalink != null %}
-      {% assign path_json = item.permalink | prepend: '/' %}
-    {% else %}
-      {% assign path_json = item.path %}
-      {% assign split_dataset = path_coll_ext_dataset | split: '/' %}
-      {% assign current_coll = split_dataset[0] %}    
-      {% assign path_json = path_json | replace_first: current_coll,'' %}
-    {% endif %}
-    {% assign name_id_html = name_id | append: '.html' %}   
-    {% assign name_id_json = name_id | append: '.json' %} 
-    {% assign path_json = path_json | replace_first: name_id_html,name_id_json %}
-    {% assign path_json = path_json | prepend: site.baseurl %}
-    {% assign path_json = path_json | replace: '//','/' %}
-  	
-  	{% comment %}path_img_src{% endcomment %}
+   
+  	{% comment %}extract path_json_article{% endcomment %}
+    {% include coll_ext/json_dataset/path_json_article.html
+      permalink=item.permalink
+      path=item.path
+    %}
+    
+  	{% comment %}extract path_img_src{% endcomment %}
     {% include templates/_utils/extract/path_img_src.html 
       path_image=item.header_img
     %}
-
-    {% comment %}{% assign category = path_folder_article %}
-    {% assign category = category | replace : name_dataset, '' | replace: '/','' %}{% endcomment %}
-
-    {% comment %}{% assign article_url = site.baseurl | append: '/' | append: default_page_article_url | append: site.data.templates._extra.config.default_hash_prefix_article_url  %}
-    {% assign article_url = article_url | append: '/' | append: path_folder_article | append: name_id %}{% endcomment %}
-
+    
   	{% comment %}<!-- json data -->{% endcomment %}
     {
-    	"relative_url": "{{path_folder_article}}{{name_id}}",
-    	"path_json" : "{{path_json}}",
+    	"relative_url": "{{relative_url_angjs_article}}",
+    	"path_json" : "{{path_json_article}}",
     	"title" : "{{item.title}}",
       "subtitle" : "{{item.subtitle}}",
       "raw_date" : "{{item.date-publication}}",   
-      "display_date" : "{{item.date-publication | date: "%B %-d, %Y"}}",
+      "meta_date" : "{{item.date-publication | date: "%B %-d, %Y"}}",
       "path_header_img" : "{{path_img_src}}",
       "description" : "{{item.description | strip_html | strip }}"
     } {% unless forloop.last %},{% endunless %}
