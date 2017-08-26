@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/jekyll/jekyll-assets
-  revision: 7e32498762c4aa977e0ab727792bf8c69a92bedc
+  revision: 588320535a313b0aedb8f07cbc79087074358c6e
   branch: master
   specs:
     jekyll-assets (2.3.2)
@@ -25,8 +25,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.5.1)
-      public_suffix (~> 2.0, >= 2.0.2)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     colorator (1.1.0)
     concurrent-ruby (1.0.5)
     extras (0.3.0)
@@ -35,7 +35,7 @@ GEM
       addressable (~> 2)
     ffi (1.9.18)
     forwardable-extended (2.6.0)
-    jekyll (3.5.1)
+    jekyll (3.5.2)
       addressable (~> 2.4)
       colorator (~> 1.0)
       jekyll-sass-converter (~> 1.0)
@@ -59,7 +59,7 @@ GEM
     mini_magick (4.5.1)
     pathutil (0.14.0)
       forwardable-extended (~> 2.6)
-    public_suffix (2.0.5)
+    public_suffix (3.0.0)
     rack (1.6.8)
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
